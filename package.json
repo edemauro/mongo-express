@@ -52,6 +52,8 @@
     "chai": "3.5.0",
     "gulp-jscs": "^3.0.2",
     "gulp-jshint": "^2.0.1",
+    "gulp-livereload": "^3.8.1",
+    "gulp-nodemon": "^2.0.7",
     "mocha": "2.4.5"
   },
   "engines": {
@@ -63,7 +65,7 @@
     "jshint": "jshint -c .jshintrc --exclude-path .jshintignore .",
     "jscs": "jscs .",
     "start": "node app",
-    "test": "snyk test && ./node_modules/mocha/bin/mocha"
+    "test": "./node_modules/mocha/bin/mocha"
   },
   "main": "./middleware"
 }
