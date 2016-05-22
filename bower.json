@@ -1,0 +1,33 @@
+{
+  "name": "mongo-express",
+  "description": "Web-based admin interface for MongoDB",
+  "main": "./app.js",
+  "authors": [
+    "https://github.com/mongo-express"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "admin",
+    "administration",
+    "collection",
+    "database",
+    "GUI",
+    "interface",
+    "manage",
+    "manage-mongo",
+    "mongo",
+    "mongodb",
+    "phpmyadmin",
+    "UI",
+    "web-based"
+  ],
+  "homepage": "https://github.com/edemauro/mongo-express",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
