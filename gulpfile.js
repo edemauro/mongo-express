@@ -5,7 +5,9 @@ const jscs = require('gulp-jscs');
 const jshint = require('gulp-jshint');
 const nodemon = require('gulp-nodemon');
 const liveReload = require('gulp-livereload');
+const babel = require('gulp-babel');
 const src = ['*.js', 'lib/**/*.js'];
+const angularFiles = ['front_end/core/**/*.js'];
 
 gulp.task('jscs', () => {
   gulp.src(src)
@@ -35,8 +37,17 @@ gulp.task('nodemon', () => {
   });
 });
 
-gulp.task('watch', () => {
-  gulp.watch(src, ['jscs', 'lint']);
+gulp.task('babel', () => {
+  gulp.src(angularFiles)
+    .pipe(babel({
+      presets: ['es2015'],
+    }))
+    .pipe(gulp.dest('public/javascripts/angular/'));
 });
 
-gulp.task('default', ['jscs', 'lint', 'lr', 'nodemon', 'watch']);
+gulp.task('watch', () => {
+  gulp.watch(src, ['jscs', 'lint']);
+  gulp.watch(angularFiles, ['babel']);
+});
+
+gulp.task('default', ['jscs', 'lint', 'babel', 'lr', 'nodemon', 'watch']);
