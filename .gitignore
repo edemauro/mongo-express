@@ -82,3 +82,7 @@ mongod
 *.ntvs*
 *.njsproj
 *.sln
+
+# Bower
+# =====
+public/bower_components
