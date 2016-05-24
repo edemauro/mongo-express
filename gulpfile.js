@@ -36,7 +36,7 @@ gulp.task('babel', () => {
       presets: ['es2015'],
     }))
     .pipe(header('// ${headerMessage}\n', { headerMessage: headerMessage }))
-    .pipe(gulp.dest('public/angular/'))
+    .pipe(gulp.dest('public/angular/'));
 });
 
 gulp.task('copy views', () => {
