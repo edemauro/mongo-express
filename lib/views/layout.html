@@ -36,49 +36,17 @@
   <script src="{{ baseHref }}javascripts/renderjson.js"></script>
   <script src="{{ baseHref }}bower_components/angular/angular.min.js"></script>
   <script src="{{ baseHref }}bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
-  <script src="{{ baseHref }}javascripts/angular/core.client.module.js"></script>
-  <script src="{{ baseHref }}javascripts/angular/core.client.routes.js"></script>
-  <script src="{{ baseHref }}javascripts/angular/controllers/home.client.controller.js"></script>
+  <script src="{{ baseHref }}angular/core/core.client.module.js"></script>
+  <script src="{{ baseHref }}angular/core/core.client.routes.js"></script>
+  <script src="{{ baseHref }}angular/core/controllers/home.client.controller.js"></script>
+  <script src="{{ baseHref }}angular/core/controllers/header.client.controller.js"></script>
   {% block head %}{% endblock %}
 </head>
 
 <body ng-app="app">
+<nav ng-include src="'angular/core/views/header.client.view.html'" class="navbar navbar-default navbar-fixed-top"></nav>
 
-<nav class="navbar navbar-default navbar-fixed-top">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <div class="logo-nav">
-        <a href="{{ baseHref }}">
-          <img src="{{ baseHref }}images/mongo-express-logo.png" />
-        </a>
-      </div>
-      <a class="navbar-brand" href="">Mongo Express</a>
-    </div>
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-
-
-
-        {% block breadcrumb %}
-        {% endblock %}
-      </ul>
-
-<!--       <ul class="nav navbar-nav navbar-right">
-        <li><a href="../navbar/">Default</a></li>
-        <li><a href="../navbar-static-top/">Static top</a></li>
-        <li class="active"><a href="./">Fixed top <span class="sr-only">(current)</span></a></li>
-      </ul>
- -->
-    </div><!--/.nav-collapse -->
-  </div>
-</nav>
-
+<!-- ADD IN ALERTS -->
 <div class="container">
   <div class="row">
     <div class="col-md-12">

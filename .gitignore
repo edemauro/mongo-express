@@ -88,4 +88,4 @@ mongod
 public/bower_components
 
 # Babel Output
-public/javascripts/angular
+public/angular

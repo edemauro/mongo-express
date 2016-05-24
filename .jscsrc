@@ -17,5 +17,6 @@
         "manifest.yml",
         "package.json",
         "public/javascripts/**",
+        "gulpfile.js"
         ]
 }

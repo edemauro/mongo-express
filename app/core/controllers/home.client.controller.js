@@ -7,6 +7,5 @@
 
   function HomeController() {
     var vm = this;
-    console.log('a');
   };
 })();

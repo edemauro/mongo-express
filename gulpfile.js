@@ -4,50 +4,61 @@ const gulp = require('gulp');
 const jscs = require('gulp-jscs');
 const jshint = require('gulp-jshint');
 const nodemon = require('gulp-nodemon');
-const liveReload = require('gulp-livereload');
+const plumber = require('gulp-plumber');
+const header = require('gulp-header');
 const babel = require('gulp-babel');
-const src = ['*.js', 'lib/**/*.js'];
-const angularFiles = ['front_end/core/**/*.js'];
+const paths = {
+  serverFiles: ['*.js', 'lib/**/*.js'],
+  angularFiles: ['app/**/*.js'],
+  angularHTML: ['app/**/*.html']
+};
+const headerMessage = 'This is a compiled file. DO NOT EDIT.';
 
 gulp.task('jscs', () => {
-  gulp.src(src)
+  return gulp.src(paths.serverFiles)
+    .pipe(plumber())
     .pipe(jscs())
     .pipe(jscs.reporter());
 });
 
 gulp.task('lint', () => {
-  gulp.src(src)
+  return gulp.src(paths.serverFiles)
+    .pipe(plumber())
     .pipe(jshint('.jshintrc'))
     .pipe(jshint.reporter('default'))
     .pipe(jshint.reporter('fail'));
 });
 
-gulp.task('lr', () => {
-  liveReload.listen();
-});
-
-gulp.task('nodemon', () => {
-  nodemon({
-    script: 'app.js',
-    ext: 'js',
-  })
-  .on('restart', () => {
-    gulp.src('app.js')
-      .pipe(liveReload());
-  });
-});
-
 gulp.task('babel', () => {
-  gulp.src(angularFiles)
+  return gulp.src(paths.angularFiles)
+    .pipe(plumber())
     .pipe(babel({
       presets: ['es2015'],
     }))
-    .pipe(gulp.dest('public/javascripts/angular/'));
+    .pipe(header('// ${headerMessage}\n', { headerMessage: headerMessage }))
+    .pipe(gulp.dest('public/angular/'))
+});
+
+gulp.task('copy views', () => {
+  return gulp.src(paths.angularHTML)
+    .pipe(gulp.dest('public/angular/'));
+});
+
+gulp.task('nodemon', () => {
+  return nodemon({
+    script: 'app.js',
+    ignore: [
+      'gulpfile.js',
+      'node_modules/'
+    ],
+    ext: 'js html'
+  });
 });
 
 gulp.task('watch', () => {
-  gulp.watch(src, ['jscs', 'lint']);
-  gulp.watch(angularFiles, ['babel']);
+  gulp.watch(paths.serverFiles, ['jscs', 'lint']);
+  gulp.watch(paths.angularFiles, ['babel']);
+  gulp.watch(paths.angularHTML, ['copy views']);
 });
 
-gulp.task('default', ['jscs', 'lint', 'babel', 'lr', 'nodemon', 'watch']);
+gulp.task('default', ['babel', 'copy views', 'nodemon', 'watch']);
