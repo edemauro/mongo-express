@@ -5,12 +5,12 @@
     .config(config);
 
   function config($stateProvider, $urlRouterProvider) {
-    $urlRouterProvider.otherwise("home");
+    $urlRouterProvider.otherwise("/");
 
     $stateProvider
       .state('home', {
         url: '/',
-        templateUrl: '/angular/core/views/home.client.view.html',
+        templateUrl: '/angular/core/views/index.client.view.html',
         controller: 'HomeController',
         controllerAs: 'vm'
       });

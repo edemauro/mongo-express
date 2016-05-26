@@ -15,8 +15,7 @@
       <a class="navbar-brand" href="">Mongo Express</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-        <li ng-include src="'angular/core/views/_home.header.client.partial.html'"></li>
+      <ul class="nav navbar-nav" ng-include src="vm.activeTemplate.url" >
       </ul>
   
 <!--       <ul class="nav navbar-nav navbar-right">
