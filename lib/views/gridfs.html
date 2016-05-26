@@ -2,35 +2,6 @@
 
 {% block title %}{{ bucketName }}{% endblock %}
 
-
-{% block breadcrumb %}
-  <li>
-    <a href="{{ baseHref }}db/{{ dbName}}">Database:</a>
-  </li>
-  <li class="dropdown">
-    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ dbName }}<span class="caret"></span></a>
-    <ul class="dropdown-menu">
-      {% for db in databases %}
-      <li><a href="{{ baseHref }}db/{{ db }}/">{{ db }}</a></li>
-      {% endfor %}
-    </ul>
-  </li>
-  <li>
-    <a href="{{ baseHref }}db/{{ dbName}}"><span class="glyphicon glyphicon-chevron-right"></span></a>
-  </li>
-  <li>
-    <a href="{{ baseHref }}db/{{ dbName }}/{{ bucketName }}">Bucket:</a>
-  </li>
-  <li class="dropdown">
-    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ bucketName }}<span class="caret"></span></a>
-    <ul class="dropdown-menu">
-      {% for bucket in buckets %}
-      <li><a href="{{ baseHref }}db/{{ dbName }}/gridFS/{{ bucket }}">{{ bucket }}</a></li>
-      {% endfor %}
-    </ul>
-  </li>
-{% endblock %}
-
 {% block content %}
   {% if files.length == 0 %}
     <p class="well">
