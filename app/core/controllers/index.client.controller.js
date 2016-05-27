@@ -9,16 +9,17 @@
     let vm = this;
 
     vm.context = ContextService.context;
+    vm.deleteDb = deleteDb;
+
     ContextService.getIndex()
       .then(() => {
         vm.context = ContextService.context;
         if(vm.context.ctx.info.uptime > 86400) {
           vm.uptimeDays = window.Math.floor(vm.context.ctx.info.uptime / 86400) + 'days';
         }
-        console.log(vm.context);
       });
 
-    vm.deleteDb = (db) => {
+    function deleteDb(db) {
       // still need to implement deletion + whatever normally happens after deleting
       let modalInstance = $uibModal.open({
         animation: true,

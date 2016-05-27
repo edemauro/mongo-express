@@ -10,9 +10,11 @@
 
     vm.database = db;
     vm.dbConfirm = "";
+    vm.delete = delete;
+    vm.close = close;
 
     // send delete http request IF dbconfirm === db
-    vm.delete = () => {
+    function delete() {
       if(vm.dbConfirm === vm.database) {
         DatabaseService.deleteDatabase(db)
         .then((response) => {
@@ -23,7 +25,7 @@
       }
     };
 
-    vm.close = () => {
+    function close() {
       $uibModalInstance.dismiss();
     };
   }
