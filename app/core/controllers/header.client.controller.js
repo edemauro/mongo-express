@@ -9,7 +9,7 @@
     let vm = this;
     vm.breadcrumbs = BreadCrumbsService.breadcrumbs;
     vm.activeTemplate = BreadCrumbsService.activeTemplate;
-    BreadCrumbsService.get()
+    BreadCrumbsService.getIndex()
       .then(() => {
         vm.breadcrumbs = BreadCrumbsService.breadcrumbs;
       });

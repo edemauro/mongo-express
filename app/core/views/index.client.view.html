@@ -20,22 +20,22 @@
   <div class="panel-body no-padding">
 <table class="table table-bordered table-striped table-condensed no-margin">
   <!-- for db in databases -->
-  <tr>
+  <tr ng-repeat="db in vm.breadcrumbs.databases">
     <td class="col-md-2">
-     <!--  <a href="{{ baseHref }}db/{{ db }}/" class="btn btn-success btn-block" >
+      <a href="{{ vm.breadcrumbs.baseHref }}db/{{ db }}/" class="btn btn-success btn-block" >
         <span class="glyphicon glyphicon-eye-open"></span><br>View
-      </a> -->
+      </a>
     </td>
-    <td><h3><!-- <a href="{{ baseHref }}db/{{ db }}/">{{ db }}</a> --></h3></td>
+    <td><h3><a href="{{ baseHref }}db/{{ db }}/">{{ db }}</a></h3></td>
     <!-- if !settings.read_only -->
     <td class="col-md-2">
-     <!--  <form method="POST" id="db-{{ db }}" action="{{ baseHref }}{{ db }}" style="margin: 0px;">
+      <!-- <form method="POST" id="db-{{ db }}" action="{{ baseHref }}{{ db }}" style="margin: 0px;">
         <input type="hidden" name="_method" value="delete">
         <button type="submit" class="hidden"></button>
-      </form>
-      <button class="btn btn-danger btn-block deleteButton" database-name="{{ db }}" childof="db-{{ db }}">
+      </form> -->
+      <button class="btn btn-danger btn-block deleteButton" ng-click="vm.deleteDb(db)">
         <span class="glyphicon glyphicon-trash"></span><br>Del
-      </button> -->
+      </button>
     </td>
     <!-- endif -->
   </tr>
@@ -86,9 +86,10 @@
 <script>
 'use strict';
 $(document).ready(function() {
-  $('#database').popover({
-    content: 'Database names must begin with a letter or underscore, and can contain only letters, numbers, underscores and dots.',
-  });
+  angular.element('#database')
+    .popover({
+      content: 'Database names must begin with a letter or underscore, and can contain only letters, numbers, underscores and dots.',
+    });
 
   $('.deleteButton').tooltip({
     title: 'Warning! Are you sure you want to delete this database? All collenctions and documents will be deleted.',

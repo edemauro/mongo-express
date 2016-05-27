@@ -7,12 +7,12 @@
       let service = {};
 
       service.breadcrumbs = {};
-      service.get = () => {
-        return $http.get('/breadcrumbs')
+      service.getIndex = () => {
+        return $http.get('/api/index')
           .then(getBreadCrumbsComplete);
 
         function getBreadCrumbsComplete(response) {
-          service.breadcrumbs = response.data;
+          angular.extend(service.breadcrumbs, response.data);
         }
       };
 

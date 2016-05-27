@@ -8,10 +8,10 @@
     $urlRouterProvider.otherwise("/");
 
     $stateProvider
-      .state('home', {
+      .state('index', {
         url: '/',
         templateUrl: '/angular/core/views/index.client.view.html',
-        controller: 'HomeController',
+        controller: 'IndexController',
         controllerAs: 'vm'
       });
   }
