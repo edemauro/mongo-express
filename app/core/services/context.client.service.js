@@ -40,8 +40,8 @@
       }
     }
 
-    function getDatabaseContext() {
-      return $http.get('/api/database')
+    function getDatabaseContext(db) {
+      return $http.get('/api/db/' + db)
         .then(getDatabaseContextComplete);
 
       function getDatabaseContextComplete(response) {

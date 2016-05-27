@@ -9,11 +9,10 @@
       let vm = this;
       vm.context = ContextService.context;
 
-      ContextService.getIndex()
+      ContextService.getDatabaseContext($stateParams.database)
       .then(() => {
         vm.context = ContextService.context;
         console.log(vm.context);
       });
-      console.log($stateParams);
     }
 })();
