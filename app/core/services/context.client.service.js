@@ -16,9 +16,6 @@
         url: prefix + '_gridfs.header.client.tpl.html'
       },
       {
-        url: prefix + '_database.header.client.tpl.html'
-      },
-      {
         url: prefix + '_collection.header.client.tpl.html'
       }
     ];
