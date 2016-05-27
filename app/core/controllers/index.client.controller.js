@@ -6,12 +6,12 @@
     .controller('IndexController', IndexController)
     .controller('ModalController', ModalController);
 
-  function IndexController(BreadCrumbsService, $uibModal) {
+  function IndexController(HeaderService, $uibModal) {
     let vm = this;
-    vm.breadcrumbs = BreadCrumbsService.breadcrumbs;
-    BreadCrumbsService.getIndex()
+    vm.breadcrumbs = HeaderService.breadcrumbs;
+    HeaderService.getIndex()
       .then(() => {
-        vm.breadcrumbs = BreadCrumbsService.breadcrumbs;
+        vm.breadcrumbs = HeaderService.breadcrumbs;
       });
 
     vm.deleteDb = (db) => {
@@ -36,16 +36,23 @@
     };
   };
 
-  function ModalController($uibModalInstance, db) {
+  function ModalController($uibModalInstance, DatabaseService, db) {
     let vm = this;
 
     vm.database = db;
     vm.dbConfirm = "";
 
     // send delete http request IF dbconfirm === db
+    vm.delete = () => {
+      DatabaseService.deleteDatabase(db)
+      .then(() => {
+        // if successful, update list of dbs
+        console.log('then');
+      });
+    };
 
     vm.close = () => {
-      $uibModalInstance.close();
+      $uibModalInstance.dismiss();
     };
   }
 })();

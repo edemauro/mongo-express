@@ -5,14 +5,10 @@
     .module('app')
     .controller('HeaderController', HeaderController);
 
-  function HeaderController(BreadCrumbsService) {
+  function HeaderController(HeaderService) {
     let vm = this;
-    vm.breadcrumbs = BreadCrumbsService.breadcrumbs;
-    vm.activeTemplate = BreadCrumbsService.activeTemplate;
-    BreadCrumbsService.getIndex()
-      .then(() => {
-        vm.breadcrumbs = BreadCrumbsService.breadcrumbs;
-      });
-    // need service to obtain 1) breadcrumbs, 2) which template
+    vm.breadcrumbs = HeaderService.breadcrumbs;
+    vm.activeTemplate = HeaderService.activeTemplate;
+    // need to determine which template. thinking during statechangesuccess
   };
 })();
