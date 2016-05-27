@@ -1,9 +1,9 @@
 (() => {
   angular
     .module('app')
-    .factory('HeaderService', HeaderService);
+    .factory('ContextService', ContextService);
 
-  function HeaderService($http) {
+  function ContextService($http) {
     let prefix = 'angular/core/views/partials/';
     let templates = [
       {
@@ -11,11 +11,20 @@
       },
       {
         url: prefix + '_document.header.client.tpl.html'
+      },
+      {
+        url: prefix + '_gridfs.header.client.tpl.html'
+      },
+      {
+        url: prefix + '_database.header.client.tpl.html'
+      },
+      {
+        url: prefix + '_collection.header.client.tpl.html'
       }
     ];
     let activeTemplate = templates[0];
     let service = {
-      breadcrumbs: {},
+      context: {},
       getIndex: getIndex,
       templates: templates,
       activeTemplate: activeTemplate
@@ -28,7 +37,7 @@
         .then(getIndexComplete);
 
       function getIndexComplete(response) {
-        angular.extend(service.breadcrumbs, response.data);
+        angular.extend(service.context, response.data);
       }
     }
   }

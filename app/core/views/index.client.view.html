@@ -20,9 +20,9 @@
   <div class="panel-body no-padding">
 <table class="table table-bordered table-striped table-condensed no-margin">
   <!-- for db in databases -->
-  <tr ng-repeat="db in vm.breadcrumbs.databases">
+  <tr ng-repeat="db in vm.context.databases">
     <td class="col-md-2">
-      <a href="{{ vm.breadcrumbs.baseHref }}db/{{ db }}/" class="btn btn-success btn-block" >
+      <a href="{{ vm.context.baseHref }}db/{{ db }}/" class="btn btn-success btn-block" >
         <span class="glyphicon glyphicon-eye-open"></span><br>View
       </a>
     </td>

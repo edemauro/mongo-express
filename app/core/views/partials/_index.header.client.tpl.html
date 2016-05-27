@@ -2,8 +2,8 @@
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Database<span class="caret"></span></a>
   <ul class="dropdown-menu">
     <!-- for db in databases -->
-      <li ng-repeat="db in vm.breadcrumbs.databases">
-      <a href="{{ vm.breadcrumbs.baseHref }}db/{{ db }}/">{{ db }}</a>
+      <li ng-repeat="db in vm.context.databases">
+      <a href="{{ vm.context.baseHref }}db/{{ db }}/">{{ db }}</a>
       </li>
     <!-- endofr -->
   </ul>

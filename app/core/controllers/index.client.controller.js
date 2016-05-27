@@ -6,12 +6,12 @@
     .controller('IndexController', IndexController)
     .controller('ModalController', ModalController);
 
-  function IndexController(HeaderService, $uibModal) {
+  function IndexController(ContextService, $uibModal) {
     let vm = this;
-    vm.breadcrumbs = HeaderService.breadcrumbs;
-    HeaderService.getIndex()
+    vm.context = ContextService.context;
+    ContextService.getIndex()
       .then(() => {
-        vm.breadcrumbs = HeaderService.breadcrumbs;
+        vm.context = ContextService.context;
       });
 
     vm.deleteDb = (db) => {

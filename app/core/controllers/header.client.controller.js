@@ -5,10 +5,10 @@
     .module('app')
     .controller('HeaderController', HeaderController);
 
-  function HeaderController(HeaderService) {
+  function HeaderController(ContextService) {
     let vm = this;
-    vm.breadcrumbs = HeaderService.breadcrumbs;
-    vm.activeTemplate = HeaderService.activeTemplate;
+    vm.context = ContextService.context;
+    vm.activeTemplate = ContextService.activeTemplate;
     // need to determine which template. thinking during statechangesuccess
   };
 })();
