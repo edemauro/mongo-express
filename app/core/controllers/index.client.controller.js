@@ -11,6 +11,7 @@
     ContextService.getIndex()
       .then(() => {
         vm.context = ContextService.context;
+        console.log(vm.context);
       });
 
     vm.deleteDb = (db) => {
