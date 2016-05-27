@@ -3,8 +3,7 @@
 
   angular
     .module('app')
-    .controller('IndexController', IndexController)
-    .controller('ModalController', ModalController);
+    .controller('IndexController', IndexController);
 
   function IndexController(ContextService, $uibModal) {
     let vm = this;
@@ -28,31 +27,14 @@
         }
       });
 
-      modalInstance.result.then((selectedItem) => {
-        console.log(selectedItem);
+      modalInstance.result.then((response) => {
+        ContextService.getIndex()
+          .then(() => {
+            vm.context = ContextService.context;
+          });
       }, () => {
         console.log('Modal dismissed at: ' + new Date());
       });
     };
   };
-
-  function ModalController($uibModalInstance, DatabaseService, db) {
-    let vm = this;
-
-    vm.database = db;
-    vm.dbConfirm = "";
-
-    // send delete http request IF dbconfirm === db
-    vm.delete = () => {
-      DatabaseService.deleteDatabase(db)
-      .then(() => {
-        // if successful, update list of dbs
-        console.log('then');
-      });
-    };
-
-    vm.close = () => {
-      $uibModalInstance.dismiss();
-    };
-  }
 })();

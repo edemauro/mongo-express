@@ -13,11 +13,14 @@
 
     // send delete http request IF dbconfirm === db
     vm.delete = () => {
-      DatabaseService.deleteDatabase(db)
-      .then(() => {
-        // if successful, update list of dbs
-        console.log('then');
-      });
+      if(vm.dbConfirm === vm.database) {
+        DatabaseService.deleteDatabase(db)
+        .then((response) => {
+          $uibModalInstance.close(response);
+        });
+      } else {
+        console.log('they do not match!');
+      }
     };
 
     vm.close = () => {

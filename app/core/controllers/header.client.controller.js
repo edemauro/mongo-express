@@ -9,6 +9,5 @@
     let vm = this;
     vm.context = ContextService.context;
     vm.activeTemplate = ContextService.activeTemplate;
-    // need to determine which template. thinking during statechangesuccess
   };
 })();
