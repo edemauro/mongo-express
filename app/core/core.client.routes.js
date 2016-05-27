@@ -13,6 +13,12 @@
         templateUrl: '/angular/core/views/index.client.view.html',
         controller: 'IndexController',
         controllerAs: 'vm'
+      })
+      .state('database', {
+        url: '/db/:database',
+        templateUrl: '/angular/core/views/database.client.view.html',
+        controller: 'DatabaseController',
+        controllerAs: 'vm'
       });
   }
 })();

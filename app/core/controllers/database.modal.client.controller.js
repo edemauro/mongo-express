@@ -10,16 +10,16 @@
 
     vm.database = db;
     vm.dbConfirm = "";
-    vm.delete = delete;
+    vm.deleteDb = deleteDb;
     vm.close = close;
 
     // send delete http request IF dbconfirm === db
-    function delete() {
+    function deleteDb() {
       if(vm.dbConfirm === vm.database) {
         DatabaseService.deleteDatabase(db)
-        .then((response) => {
-          $uibModalInstance.close(response);
-        });
+          .then((response) => {
+            $uibModalInstance.close(response);
+          });
       } else {
         console.log('they do not match!');
       }
