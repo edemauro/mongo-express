@@ -23,6 +23,7 @@
     let service = {
       context: {},
       getIndex: getIndex,
+      getDatabaseContext: getDatabaseContext,
       templates: templates,
       getActiveTemplate: getActiveTemplate,
       setActiveTemplate: setActiveTemplate
@@ -35,6 +36,15 @@
         .then(getIndexComplete);
 
       function getIndexComplete(response) {
+        angular.extend(service.context, response.data);
+      }
+    }
+
+    function getDatabaseContext() {
+      return $http.get('/api/database')
+        .then(getDatabaseContextComplete);
+
+      function getDatabaseContextComplete(response) {
         angular.extend(service.context, response.data);
       }
     }
