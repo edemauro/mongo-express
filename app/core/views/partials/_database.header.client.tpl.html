@@ -1,11 +1,12 @@
+<!-- REMOVING. Looks tacky compared to the index header and is pretty similar -->
 <li>
-  <a href="{{ baseHref }}db/{{ dbName}}">Database:</a>
+  <a ui-sref="database({ database: '{{ db }}' })">Database:</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ dbName }}<span class="caret"></span></a>
+  <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ vm.database }}<span class="caret"></span></a>
   <ul class="dropdown-menu">
-    {% for db in databases %}
-    <li><a href="{{ baseHref }}db/{{ db }}/">{{ db }}</a></li>
-    {% endfor %}
+    <li ng-repeat="db in vm.context.databases">
+        <a ui-sref="database({ database: '{{ db }}' })">{{ db }}</a>
+    </li>
   </ul>
 </li>
