@@ -5,9 +5,15 @@
     .module('app')
     .controller('HeaderController', HeaderController);
 
-  function HeaderController(ContextService) {
+  function HeaderController(ContextService, $scope, $state) {
     let vm = this;
     vm.context = ContextService.context;
-    vm.activeTemplate = ContextService.activeTemplate;
+    vm.activeTemplate = ContextService.getActiveTemplate();
+
+    $scope.$on('$stateChangeSuccess', stateChangeSuccess);
+
+    function stateChangeSuccess() {
+      vm.activeTemplate = ContextService.getActiveTemplate();
+    }
   };
 })();

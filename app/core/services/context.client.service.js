@@ -27,7 +27,8 @@
       context: {},
       getIndex: getIndex,
       templates: templates,
-      activeTemplate: activeTemplate
+      getActiveTemplate: getActiveTemplate,
+      setActiveTemplate: setActiveTemplate
     };
 
     return service;
@@ -39,6 +40,14 @@
       function getIndexComplete(response) {
         angular.extend(service.context, response.data);
       }
+    }
+
+    function getActiveTemplate() {
+      return activeTemplate;
+    }
+
+    function setActiveTemplate(id) {
+      activeTemplate = service.activeTemplate = templates[id];
     }
   }
 })();
