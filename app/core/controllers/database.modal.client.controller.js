@@ -13,7 +13,6 @@
     vm.deleteDb = deleteDb;
     vm.close = close;
 
-    // send delete http request IF dbconfirm === db
     function deleteDb() {
       if(vm.dbConfirm === vm.database) {
         DatabaseService.deleteDatabase(db)

@@ -19,6 +19,12 @@
         templateUrl: '/angular/core/views/database.client.view.html',
         controller: 'DatabaseController',
         controllerAs: 'vm'
+      })
+      .state('collection', {
+        url: '/db/:database/:collection',
+        templateUrl: '/angular/core/views/collection.client.view.html',
+        controller: 'CollectionController',
+        controllerAs: 'vm'
       });
   }
 })();
