@@ -20,7 +20,6 @@
       });
 
     function deleteDb(db) {
-      // still need to implement deletion + whatever normally happens after deleting
       let modalInstance = $uibModal.open({
         animation: true,
         templateUrl: 'deleteModalContent.html',

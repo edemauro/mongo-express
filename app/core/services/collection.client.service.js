@@ -5,7 +5,8 @@
 
   function CollectionService($http) {
     let service = {
-      deleteCollection: deleteCollection
+      deleteCollection: deleteCollection,
+      exportCollection: exportCollection
     };
 
     return service;
@@ -16,6 +17,20 @@
 
         function deleteCollectionComplete(response) {
           return response;
+        }
+    }
+
+    function exportCollection(db, collection) {
+      return $http.get('/api/db/' + db + '/export/' + collection)
+        .then(exportCollectionComplete);
+
+        function exportCollectionComplete(response) {
+          console.log(response);
+          return response;
+        }
+
+        function exportCollectionFailure(err) {
+          console.log(err);
         }
     }
   }
