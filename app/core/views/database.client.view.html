@@ -27,12 +27,12 @@
           </a>
         </td>
         <td class="col-md-1">
-          <button class="btn btn-warning btn-block" ng-click="vm.exportCollection(c)">
+          <a download="{{ c }}.json" target="_self" href="{{ vm.context.baseHref }}db/{{ vm.context.dbName }}/export/{{ c }}" class="btn btn-warning btn-block">
             <span class="glyphicon glyphicon-floppy-save"></span><br>Export
-          </button>
+          </a>
         </td>
         <td class="col-md-1">
-          <!-- <a href="{{ baseHref }}db/{{ dbName }}/expArr/{{ c }}" class="btn btn-warning btn-block"> -->
+          <a download="{{ c }}.json" href="{{ vm.context.baseHref }}db/{{ vm.context.dbName }}/expArr/{{ c }}" class="btn btn-warning btn-block">
             <span class="glyphicon glyphicon-floppy-save"></span><br>[JSON]
           </a>
         </td>
