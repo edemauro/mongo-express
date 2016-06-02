@@ -11,11 +11,7 @@
       vm.deleteCollection = deleteCollection;
       vm.exportCollection = exportCollection;
 
-      ContextService.getDatabaseContext($stateParams.database)
-        .then(() => {
-          vm.context = ContextService.context;
-          console.log(vm.context);
-        });
+      console.log(vm.context);
 
       function deleteCollection(collection) {
         let modalInstance = $uibModal.open({

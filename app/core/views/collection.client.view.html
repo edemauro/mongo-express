@@ -1,1 +1,79 @@
-PLACEHOLDER
+  <div class="stats col-md-12">
+    <h2>Collection Stats</h2>
+    <table class="table table-bordered table-striped">
+      <tr>
+        <td>
+          <strong>Documents</strong>
+        </td>
+        <td>
+          {{ vm.context.ctx.stats.count }}
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <strong>Total doc size</strong>
+        </td>
+        <td>
+          {{ vm.context.ctx.stats.size | convertBytes }}
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <strong>Average doc size</strong>
+        </td>
+        <td>
+          {{ vm.context.ctx.stats.avgObjSize | convertBytes }}
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <strong>Pre-allocated size</strong>
+        </td>
+        <td>
+          {{ vm.context.ctx.stats.storageSize | convertBytes }}
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <strong>Indexes</strong>
+        </td>
+        <td>
+          {{ vm.context.ctx.stats.nindexes }}
+        </td>
+      </tr>
+
+      <!-- {% if stats.nindexes %} -->
+        <!-- {% for size in stats.indexSizes %} -->
+        <tr>
+          <!-- <td><li>{{ loop.key }}</li></td> -->
+          <!-- <td>{{ size|convertBytes }}</td> -->
+        </tr>
+        <!-- {% endfor %} -->
+      <!-- {% endif %} -->
+
+      <tr>
+        <td>
+          <strong>Total index size</strong>
+        </td>
+        <td>
+          {{ vm.context.ctx.stats.totalIndexSize | convertBytes }}
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <strong>Padding factor</strong>
+        </td>
+        <td>
+          {{ vm.context.ctx.stats.paddingFactor }}
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <strong>Extents</strong>
+        </td>
+        <td>
+          {{ vm.context.ctx.stats.numExtents }}
+        </td>
+      </tr>
+    </table>
+  </div>
