@@ -9,11 +9,8 @@
       let vm = this;
       vm.context = ContextService.context;
 
-      ContextService.getDatabaseContext($stateParams.database)
-      .then(() => {
-        vm.context = ContextService.context;
-        console.log(vm.context);
-        console.log($stateParams);
-      });
+      ContextService.setActiveTemplate(3);
+
+      console.log(vm.context);
     }
 })();

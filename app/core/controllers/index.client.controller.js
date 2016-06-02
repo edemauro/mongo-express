@@ -11,6 +11,8 @@
     vm.context = ContextService.context;
     vm.deleteDb = deleteDb;
 
+    ContextService.setActiveTemplate(0);
+
     ContextService.getIndex()
       .then(() => {
         vm.context = ContextService.context;

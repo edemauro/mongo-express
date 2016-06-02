@@ -24,6 +24,7 @@
       context: {},
       getIndex: getIndex,
       getDatabaseContext: getDatabaseContext,
+      getCollectionContext: getCollectionContext,
       templates: templates,
       getActiveTemplate: getActiveTemplate,
       setActiveTemplate: setActiveTemplate
@@ -45,6 +46,15 @@
         .then(getDatabaseContextComplete);
 
       function getDatabaseContextComplete(response) {
+        angular.extend(service.context, response.data);
+      }
+    }
+
+    function getCollectionContext(db, collection) {
+      return $http.get('/api/db/' + db + "/" + collection)
+        .then(getCollectionContextComplete);
+
+      function getCollectionContextComplete(response) {
         angular.extend(service.context, response.data);
       }
     }

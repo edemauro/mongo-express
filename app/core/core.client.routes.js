@@ -18,13 +18,27 @@
         url: '/db/:database',
         templateUrl: '/angular/core/views/database.client.view.html',
         controller: 'DatabaseController',
-        controllerAs: 'vm'
+        controllerAs: 'vm',
+        resolve: {
+          databasePrepService: databasePrepService
+        }
       })
       .state('collection', {
         url: '/db/:database/:collection',
         templateUrl: '/angular/core/views/collection.client.view.html',
         controller: 'CollectionController',
-        controllerAs: 'vm'
+        controllerAs: 'vm',
+        resolve: {
+          collectionPrepService: collectionPrepService
+        }
       });
+  }
+
+  function databasePrepService($stateParams, ContextService) {
+    return ContextService.getDatabaseContext($stateParams.database);
+  }
+
+  function collectionPrepService($stateParams, ContextService) {
+    return ContextService.getCollectionContext($stateParams.database, $stateParams.collection);
   }
 })();
