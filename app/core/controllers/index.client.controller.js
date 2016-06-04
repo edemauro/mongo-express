@@ -5,11 +5,12 @@
     .module('app')
     .controller('IndexController', IndexController);
 
-  function IndexController(ContextService, $uibModal) {
+  function IndexController(ContextService, $uibModal, DatabaseService) {
     let vm = this;
 
     vm.context = ContextService.context;
     vm.deleteDb = deleteDb;
+    vm.addDb = addDb;
 
     ContextService.setActiveTemplate(0);
 
@@ -20,6 +21,16 @@
           vm.uptimeDays = window.Math.floor(vm.context.ctx.info.uptime / 86400) + 'days';
         }
       });
+
+    function addDb() {
+      DatabaseService.addDatabase(vm.database)
+        .then(() => {
+           ContextService.getIndex()
+            .then(() => {
+              vm.context = ContextService.context;
+            });
+        });
+    }
 
     function deleteDb(db) {
       let modalInstance = $uibModal.open({
