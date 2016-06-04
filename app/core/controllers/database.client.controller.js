@@ -10,8 +10,17 @@
       vm.context = ContextService.context;
       vm.deleteCollection = deleteCollection;
       vm.exportCollection = exportCollection;
+      vm.addCollection = addCollection;
 
-      console.log(vm.context);
+      function addCollection() {
+        CollectionService.addCollection($stateParams.database, vm.collection)
+          .then(() => {
+            return ContextService.getDatabaseContext($stateParams.database)
+              .then(() => {
+                vm.context = ContextService.context;
+              });
+          });
+      }
 
       function deleteCollection(collection) {
         let modalInstance = $uibModal.open({

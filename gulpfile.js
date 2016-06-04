@@ -56,7 +56,7 @@ gulp.task('nodemon', () => {
 });
 
 gulp.task('watch', () => {
-  gulp.watch(paths.serverFiles, ['jscs', 'lint']);
+  // gulp.watch(paths.serverFiles, ['jscs', 'lint']);
   gulp.watch(paths.angularFiles, ['babel']);
   gulp.watch(paths.angularHTML, ['copy views']);
 });

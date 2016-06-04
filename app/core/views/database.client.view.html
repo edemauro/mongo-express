@@ -5,9 +5,9 @@
     <div style="display: inline-block;">
       <h4 style="font-weight: bold;">Collections</h4>
     </div>
-    <form class="form-inline" method="POST" style="float: right;" ng-if="!vm.context.readOnly">
+    <form class="form-inline" style="float: right;" ng-if="!vm.context.readOnly" ng-submit="vm.addCollection()">
       <div class="input-group">
-        <input class="form-control" type="text" id="collection" name="collection" placeholder="Collection Name" title="Collection Name" uib-popover="Collection names must begin with a letter or underscore, and can contain only letters, numbers, underscores and dots.">
+        <input class="form-control" type="text" ng-model="vm.collection" name="collection" placeholder="Collection Name" uib-popover="Collection names must begin with a letter or underscore, and can contain only letters, numbers, underscores and dots.">
           <span class="input-group-btn">
             <button type="submit" class="btn btn-primary pull-right">
               <span class="glyphicon glyphicon-plus"></span>

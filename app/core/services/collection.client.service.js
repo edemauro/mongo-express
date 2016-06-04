@@ -6,10 +6,20 @@
   function CollectionService($http) {
     let service = {
       deleteCollection: deleteCollection,
-      exportCollection: exportCollection
+      exportCollection: exportCollection,
+      addCollection: addCollection
     };
 
     return service;
+
+    function addCollection(db, collection) {
+      return $http.post('/api/db/' + db, {collection: collection})
+        .then(addCollectionComplete);
+
+      function addCollectionComplete(response) {
+        return response;
+      }
+    }
     
     function deleteCollection(db, collection) {
         return $http.delete('/api/db/' + db + '/' + collection)

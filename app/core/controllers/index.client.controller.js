@@ -25,7 +25,7 @@
     function addDb() {
       DatabaseService.addDatabase(vm.database)
         .then(() => {
-           ContextService.getIndex()
+           return ContextService.getIndex()
             .then(() => {
               vm.context = ContextService.context;
             });
@@ -46,7 +46,7 @@
       });
 
       modalInstance.result.then((response) => {
-        ContextService.getIndex()
+        return ContextService.getIndex()
           .then(() => {
             vm.context = ContextService.context;
           });
