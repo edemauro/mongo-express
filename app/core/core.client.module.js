@@ -2,5 +2,5 @@
   'use strict';
 
   angular
-    .module('app', ['ui.router', 'ui.bootstrap']);
+    .module('app', ['ui.router', 'ui.bootstrap', 'ui.codemirror']);
 })();

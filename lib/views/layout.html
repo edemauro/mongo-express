@@ -10,6 +10,8 @@
   <link href="{{ baseHref }}stylesheets/bootstrap-theme.min.css" rel="stylesheet">
   <link href="{{ baseHref }}stylesheets/style.css" rel="stylesheet">
 
+  <link href="{{ baseHref }}bower_components/codemirror/lib/codemirror.css" rel="stylesheet">
+
   <link rel="prefetch" href="{{ baseHref }}images/gears.gif">
 
   <style type="text/css">
@@ -34,7 +36,9 @@
   <script src="{{ baseHref }}javascripts/jquery-2.1.4.min.js"></script>
   <script src="{{ baseHref }}javascripts/bootstrap.min.js"></script>
   <script src="{{ baseHref }}javascripts/renderjson.js"></script>
+  <script src="{{ baseHref }}bower_components/codemirror/lib/codemirror.js"></script>
   <script src="{{ baseHref }}bower_components/angular/angular.min.js"></script>
+  <script src="{{ baseHref }}bower_components/angular-ui-codemirror/ui-codemirror.js"></script>
   <script src="{{ baseHref }}bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
   <script src="{{ baseHref}}bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
   <script src="{{ baseHref}}bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
@@ -46,9 +50,11 @@
   <script src="{{ baseHref }}angular/core/controllers/collection.client.controller.js"></script>
   <script src="{{ baseHref }}angular/core/controllers/database.modal.client.controller.js"></script>
   <script src="{{ baseHref }}angular/core/controllers/collection.modal.client.controller.js"></script>
+  <script src="{{ baseHref }}angular/core/controllers/document.modal.controller.js"></script>
   <script src="{{ baseHref }}angular/core/services/context.client.service.js"></script>
   <script src="{{ baseHref }}angular/core/services/database.client.service.js"></script>
   <script src="{{ baseHref }}angular/core/services/collection.client.service.js"></script>
+  <script src="{{ baseHref }}angular/core/services/document.service.js"></script>
   <script src="{{ baseHref }}angular/core/filters/bytes.client.filter.js"></script>
   {% block head %}{% endblock %}
 </head>

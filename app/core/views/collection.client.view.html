@@ -1,5 +1,3 @@
-<link ng-href="{{ vm.context.baseHref }}stylesheets/codemirror.css" rel="stylesheet">
-<script type="text/javascript" src="/javascripts/codemirror-compressed.js"></script>
 <script type="text/javascript">
 'use strict';
 function getParameterByName(name) { name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]"); var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"), results = regex.exec(location.search); return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " ")); }
@@ -9,37 +7,9 @@ jQuery(document).ready(function($) {
     $('#tabs a[href="#advanced"]').tab('show');
   }
 });
-
 </script>
 
-  <!-- {% if editorTheme != "default" %} -->
-  <!-- <link href="{{ baseHref }}stylesheets/theme/{{ editorTheme }}.css" rel="stylesheet"> -->
-  <!-- {% endif %} -->
-
 <style type="text/css">
-  .CodeMirror-scroll {
-    height: 120px;
-    overflow: auto;
-  }
-
-  .modal-body .CodeMirror .CodeMirror-scroll {
-    height: auto;
-    min-height: 200px;
-    overflow-y: hidden;
-    overflow-x: auto;
-    width: 100%;
-  }
-
-  .tab-pane > form {
-    padding-bottom: 5px;
-  }
-
-  @media (min-width: 992px) { /* meduim and up */
-    #advanced .form-group .btn {
-      height: 150px;
-    }
-  }
-
   li.uib-tab {
     width: 49%;
     display: table-cell;
@@ -47,7 +17,7 @@ jQuery(document).ready(function($) {
 </style>
 
 <p ng-if="!vm.context.readOnly">
-  <button type="button" data-toggle="modal" data-target="#addDocument" class="btn btn-success btn-large btn-block">
+  <button type="button" class="btn btn-success btn-large btn-block" ng-click="vm.addDocument()">
     <span class="glyphicon glyphicon-pencil"></span>
     New Document
   </button>
@@ -107,18 +77,27 @@ jQuery(document).ready(function($) {
   </uib-tab>
 </uib-tabset>
 
-<script type="text/ng-template" id="addDocumentModal.html">
+<script type="text/ng-template" id="addDocumentModalContent.html">
   <div class="modal-header">
-    <button class="close" data-dismiss="modal">×</button>
+    <button class="close" ng-click="vm.close()">×</button>
     <h2>Add Document</h2>
   </div>
 
   <div class="modal-body">
-    <textarea id="document" name="document">
-      {"_id": ObjectID()}
-    </textarea>
+    <ui-codemirror ui-codemirror-opts="vm.editorOptions" ng-model="vm.doc"></ui-codemirror>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-error" ng-click="vm.close()">Close</button>
+    <button type="submit" class="btn btn-success" ng-click="vm.addDocument()">
+        <span class="glyphicon glyphicon-pencil"></span>
+        Save
+      </button>
   </div>
 </script>
+
+<p class="well" ng-if="!vm.context.ctx.documents">
+  No documents found.
+</p>
 
 <div class="stats col-md-12">
   <h2>Collection Stats</h2>
