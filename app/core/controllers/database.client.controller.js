@@ -46,7 +46,7 @@
         }, () => {
           console.log('Modal dismissed at: ' + new Date());
         });
-      };
+      }
 
       function exportCollection(collection) {
         return CollectionService.exportCollection($stateParams.database, collection)

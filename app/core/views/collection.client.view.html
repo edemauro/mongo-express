@@ -99,6 +99,79 @@ jQuery(document).ready(function($) {
   No documents found.
 </p>
 
+<div class="row">
+  <div class="col-md-12" ng-if="!vm.context.readOnly">
+    <h2>Rename Collection</h2>
+    <form class="well form-inline" ng-submit="vm.renameCollection()">
+      <div class="form-group">
+        <span class="add-on">{{ vm.context.dbName }} . </span>
+        <input class="form-control" type="text" name="collection" ng-model="vm.name" placeholder="{{ vm.context.collectionName }}">
+      </div>
+      <button type="submit" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        Rename
+      </button>
+    </form>
+  </div>
+</div>
+
+<h2>Tools</h2>
+<div class="row">
+  <div class="col-sm-6" ng-class="{ 'col-lg-3': !vm.context.readOnly }">
+    <div class="well">
+    <a href="{{ vm.context.baseHref }}db/{{ vm.context.dbName }}/export/{{ vm.context.collectionName }}" class="btn btn-warning btn-block">
+      <span class="glyphicon glyphicon-floppy-save"></span><br>Export Standard
+    </a>
+    </div>
+  </div>
+
+  <div class="col-sm-6" ng-class="{ 'col-lg-3': !vm.context.readOnly }">
+    <div class="well">
+    <a href="{{ vm.context.baseHref }}db/{{ vm.context.dbName }}/expArr/{{ vm.context.collectionName }}" class="btn btn-warning btn-block">
+      <span class="glyphicon glyphicon-floppy-save"></span><br>Export --jsonArray
+    </a>
+    </div>
+  </div>
+
+  <div class="col-sm-6 col-lg-3" ng-if="!vm.context.readOnly">
+    <div class="well">
+      <a href="{{ vm.context.baseHref }}db/{{ vm.context.dbName }}/compact/{{ vm.context.collectionName }}" class="btn btn-danger btn-block">
+        <span class="glyphicon glyphicon-resize-small"></span><br>Compact
+      </a>
+    </div>
+  </div>
+
+  <div class="col-sm-6 col-lg-3">
+    <div class="well">
+      <button class="btn btn-danger deleteButton btn-block" ng-click="vm.deleteCollection()">
+        <span class="glyphicon glyphicon-trash"></span><br>Delete
+      </button>
+    </div>
+  </div>
+</div>
+
+<script type="text/ng-template" id="collectionModalContent.html">
+  <div class="modal-header">
+    <button type="button" class="close" ng-click="vm.close()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <h4>Delete collection</h4>
+  </div>
+  <div class="modal-body">
+    <p>
+      Be careful! You are about to delete whole <strong>{{ vm.collection }}</strong> collection.
+    </p>
+    <p>
+      <label for="confirmation-input">Type the collection name to proceed.</label>
+      <input type="text" id="confirmation-input" name="confirmation-input" ng-model="vm.collectionConfirm" />
+    </p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn" id="delete" ng-click="vm.deleteCollection()">Delete</button>
+    <button type="button" class="btn btn-primary" ng-click="vm.close()">Cancel</button>
+  </div>
+</script>
+
 <div class="stats col-md-12">
   <h2>Collection Stats</h2>
   <table class="table table-bordered table-striped">

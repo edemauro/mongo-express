@@ -7,7 +7,8 @@
     let service = {
       deleteCollection: deleteCollection,
       exportCollection: exportCollection,
-      addCollection: addCollection
+      addCollection: addCollection,
+      renameCollection: renameCollection
     };
 
     return service;
@@ -42,6 +43,16 @@
         function exportCollectionFailure(err) {
           console.log(err);
         }
+    }
+
+    function renameCollection(db, coll, name) {
+      return $http.put('/api/db/' + db + '/' + coll, {collection: name})
+        .then(renameCollectionComplete);
+
+      function renameCollectionComplete(response) {
+        console.log(response);
+        return response;
+      }
     }
   }
 })();
