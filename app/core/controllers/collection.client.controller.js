@@ -5,7 +5,7 @@
     .module('app')
     .controller('CollectionController', CollectionController);
 
-    function CollectionController(ContextService, $stateParams, $uibModal, $state, CollectionService) { 
+    function CollectionController(ContextService, $stateParams, $uibModal, $state, CollectionService, DocumentService) { 
       let vm = this;
       vm.context = ContextService.context;
       vm.addDocument = addDocument;
@@ -16,6 +16,7 @@
       vm.itemsPerPage = 10;
       vm.pageChanged = pageChanged;
       vm.loadDocument = loadDocument;
+      vm.deleteDocument = deleteDocument;
 
       ContextService.setActiveTemplate(3);
 
@@ -37,15 +38,24 @@
           }
         });
 
-        modalInstance.result.then((response) => {
-          // return ContextService.getDatabaseContext($stateParams.database)
-          //   .then(() => {
-          //     vm.context = ContextService.context;
-          //   });
-          console.log(response);
+        modalInstance.result.then(() => {
+          return ContextService.getCollectionContext($stateParams.database, $stateParams.collection)
+            .then(() => {
+              vm.context = ContextService.context;
+            });
         }, () => {
           console.log('Modal dismissed at: ' + new Date());
         });
+      }
+
+      function deleteDocument(id) {
+        return DocumentService.deleteDocument($stateParams.database, $stateParams.collection, id)
+          .then(() => {
+            return ContextService.getCollectionContext($stateParams.database, $stateParams.collection)
+              .then(() => {
+                vm.context = ContextService.context;
+              });
+          });
       }
 
       function deleteCollection() {
