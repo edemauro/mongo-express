@@ -11,6 +11,10 @@
       vm.addDocument = addDocument;
       vm.deleteCollection = deleteCollection;
       vm.renameCollection = renameCollection;
+      vm.totalItems = vm.context.ctx.docs.length;
+      vm.currentPage = 1;
+      vm.itemsPerPage = 10;
+      vm.pageChanged = pageChanged;
 
       ContextService.setActiveTemplate(3);
 
@@ -60,6 +64,7 @@
         });
 
         modalInstance.result.then((response) => {
+          // not updating navbar
           $state.go('database', { 'database': $stateParams.database });
         }, () => {
           console.log('Modal dismissed at: ' + new Date());
@@ -69,8 +74,13 @@
       function renameCollection() {
         return CollectionService.renameCollection($stateParams.database, $stateParams.collection, vm.name)
           .then(() => {
+            // not updating navbar
             $state.go('database', { 'database': $stateParams.database });
           });
+      }
+
+      function pageChanged() {
+        console.log(vm.currentPage);
       }
     }
 })();

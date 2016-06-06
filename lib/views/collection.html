@@ -101,29 +101,6 @@ renderjson.set_show_to_level({{ collapsibleJSONDefaultUnfold }});
     </nav>
   {% endif %}
 
-  {% endif %}
-  
-  <!-- rename collection -->
-  <div class="row">
-    {% if !settings.read_only %}
-      <div class="col-md-12">
-        <h2>Rename Collection</h2>
-        <form method="POST" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}" class="well form-inline">
-          <input type="hidden" name="_method" value="put">
-          <div class="form-group">
-            <span class="add-on">{{ dbName }} . </span>
-            <input class="form-control" type="text" id="collection" name="collection" placeholder="{{ collectionName }}">
-          </div>
-          <button type="submit" class="btn btn-primary">
-            <span class="glyphicon glyphicon-pencil"></span>
-            Rename
-          </button>
-        </form>
-      </div>
-    {% endif %}
-
-  </div>
-
 <script type="text/javascript">
 
 function loadDocument(id) {
