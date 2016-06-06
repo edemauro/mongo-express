@@ -12,6 +12,8 @@
       vm.exportCollection = exportCollection;
       vm.addCollection = addCollection;
 
+      ContextService.setActiveTemplate(0);
+
       function addCollection() {
         CollectionService.addCollection($stateParams.database, vm.collection)
           .then(() => {

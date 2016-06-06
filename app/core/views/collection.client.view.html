@@ -106,7 +106,7 @@ jQuery(document).ready(function($) {
     </th>
   </thead>
   <tbody>
-    <tr ng-repeat="doc in vm.context.ctx.docs">
+    <tr ng-repeat="doc in vm.context.ctx.docs" ng-click="vm.loadDocument(doc._id)">
       <td ng-repeat="(key, value) in doc">{{ value }}</td>
     </tr>
   </tbody>
