@@ -107,7 +107,7 @@ jQuery(document).ready(function($) {
       </th>
     </thead>
     <tbody>
-      <tr ng-repeat="doc in vm.context.ctx.docs" ng-click="vm.loadDocument(doc._id)">
+      <tr ng-repeat="doc in vm.context.ctx.docs.slice(((vm.currentPage-1)*vm.itemsPerPage), ((vm.currentPage)*vm.itemsPerPage))" ng-click="vm.loadDocument(doc._id)">
         <td ng-repeat="(key, value) in doc">
           <button type="submit" class="btn btn-danger" ng-if="key=='_id' && !vm.context.readOnly && vm.context.collectionName !='system.indexes'" ng-click="vm.deleteDocument(value);$event.stopPropagation()">
             <span class="glyphicon glyphicon-trash"></span>
@@ -119,8 +119,9 @@ jQuery(document).ready(function($) {
   </table>
 </div>
 
-
 <uib-pagination total-items="vm.totalItems" ng-model="vm.currentPage" ng-change="vm.pageChanged()"></uib-pagination>
+
+{{ vm.totalItems }}
 
 <div class="row">
   <div class="col-md-12" ng-if="!vm.context.readOnly">

@@ -47,6 +47,7 @@
 
       function getDatabaseContextComplete(response) {
         angular.extend(service.context, response.data);
+        return response.data;
       }
     }
 
@@ -55,7 +56,8 @@
         .then(getCollectionContextComplete);
 
       function getCollectionContextComplete(response) {
-        angular.extend(service.context, response.data);
+        angular.extend(service.context, response.data)
+        return response.data;
       }
     }
 
