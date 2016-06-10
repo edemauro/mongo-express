@@ -8,7 +8,8 @@
       deleteCollection: deleteCollection,
       exportCollection: exportCollection,
       addCollection: addCollection,
-      renameCollection: renameCollection
+      renameCollection: renameCollection,
+      compactCollection: compactCollection
     };
 
     return service;
@@ -18,6 +19,15 @@
         .then(addCollectionComplete);
 
       function addCollectionComplete(response) {
+        return response;
+      }
+    }
+
+    function compactCollection(db, collection) {
+      return $http.get('/db/' + db + '/compact/' + collection)
+        then(compactCollectionComplete);
+
+      function compactCollectionComplete(response) {
         return response;
       }
     }

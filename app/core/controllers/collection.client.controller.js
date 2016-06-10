@@ -17,6 +17,7 @@
       vm.pageChanged = pageChanged;
       vm.loadDocument = loadDocument;
       vm.deleteDocument = deleteDocument;
+      vm.compact = compact;
 
       ContextService.setActiveTemplate(3);
 
@@ -46,6 +47,14 @@
         }, () => {
           console.log('Modal dismissed at: ' + new Date());
         });
+      }
+
+      function compact() {
+        return CollectionService.compactCollection($stateParams.database, $stateParams.collection)
+          .then((response) => {
+            console.log(response);
+            // need to implement alerts!!
+          })
       }
 
       function deleteDocument(id) {
