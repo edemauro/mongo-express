@@ -1,30 +1,9 @@
 <!-- {% block title %}{{ document._id|to_string }}{% endblock %} -->
-<!-- <form method="POST" id="documentEditForm" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}/{{ document._id | json | safe | url_encode }}"> -->
-<div ng-if="vm.context.ctx.docLength > 10">
-  <div ng-if="!vm.readOnly">
-    <input type="hidden" name="_method" value="put">
-    <button onclick="return onBackClick()" class="backButton btn btn-warning btn-large">
-        <span class="glyphicon glyphicon-arrow-left"></span>
-        Back
-    </button>
-    <button type="submit" class="btn btn-success btn-large pull-right" onclick="return onSubmitClick()">
-      <span class="glyphicon glyphicon-pencil"></span>
-      Save
-    </button>
-  </div><!-- !vm.readOnly -->
-  <div ng-if="vm.readOnly">
-    <button onclick="return history.back()" class="btn btn-warning btn-large btn-block">
-      <span class="glyphicon glyphicon-arrow-left"></span>
-      Back
-    </button>
-  </div><!-- vm.readOnly -->
-</div>
+<!-- INSIDE THE TEXTAREA BELOW -->
+<!-- {% if settings.read_only %} readonly="readonly"{% endif %} -->
+<textarea class="col-md-12" id="document" name="document"}>{{ vm.context.ctx.docString }}</textarea>
 <br />
- 
-
-<textarea class="col-md-12" id="document" name="document"{% if settings.read_only %} readonly="readonly"{% endif %}>{{ vm.context.ctx.docString }}</textarea>
-<br />
-
+<form method="POST" action="{{ vm.context.baseHref/db/ vm.context.dbName/vm.context.collectionName/vm.context.document._id }}">
   <div>
     <div ng-if="!vm.readOnly">
       <input type="hidden" name="_method" value="put">
@@ -46,4 +25,16 @@
     </div><!-- vm.readOnly -->
   </div>
 </form>
+
+<div ng-if="!vm.context.readOnly">
+<br>
+  <form method="POST" action="{{ vm.context.baseHref/db/ vm.context.dbName/vm.context.collectionName/vm.context.document._id }}">
+    <input type="hidden" name="_method" value="delete">
+    <button type="submit" class="btn btn-danger">
+      <span class="glyphicon glyphicon-trash"></span>
+      Delete
+    </button>
+  </form>
+</div>
+
 
