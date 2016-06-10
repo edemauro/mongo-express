@@ -9,5 +9,7 @@
     let vm = this;
     
     vm.context = ContextService.context;
+
+    console.log(vm.context);
   }
 })();
