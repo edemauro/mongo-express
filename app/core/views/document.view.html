@@ -1,0 +1,23 @@
+<!-- {% block title %}{{ document._id|to_string }}{% endblock %} -->
+<!-- <form method="POST" id="documentEditForm" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}/{{ document._id | json | safe | url_encode }}"> -->
+  <!-- {% if docLength > 10 %} -->
+    <div>
+      <!-- {% if !settings.read_only %} -->
+        <input type="hidden" name="_method" value="put">
+        <button onclick="return onBackClick()" class="backButton btn btn-warning btn-large">
+         <span class="glyphicon glyphicon-arrow-left"></span>
+          Back
+        </button>
+        // <button type="submit" class="btn btn-success btn-large pull-right" onclick="return onSubmitClick()">
+          <span class="glyphicon glyphicon-pencil"></span>
+          Save
+        </button>
+      <!-- {% else %} -->
+        <button onclick="return history.back()" class="btn btn-warning btn-large btn-block">
+         <span class="glyphicon glyphicon-arrow-left"></span>
+          Back
+        </button>
+      <!-- {% endif %} -->
+    </div>
+  <br />
+  <!-- {% endif %} -->

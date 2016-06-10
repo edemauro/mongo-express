@@ -102,7 +102,11 @@
       }
 
       function loadDocument(id) {
-        console.log(id);
+        $state.go('document', { 
+          'database': $stateParams.database,
+          'collection': $stateParams.collection,
+          'document': id
+        });
       }
     }
 })();

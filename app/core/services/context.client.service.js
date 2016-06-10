@@ -23,6 +23,7 @@
     let service = {
       context: {},
       getIndex: getIndex,
+      getDocumentContext: getDocumentContext,
       getDatabaseContext: getDatabaseContext,
       getCollectionContext: getCollectionContext,
       templates: templates,
@@ -47,6 +48,16 @@
 
       function getDatabaseContextComplete(response) {
         angular.extend(service.context, response.data);
+        return response.data;
+      }
+    }
+
+    function getDocumentContext(db, collection, document) {
+      return $http.get('/api/db/' + db + '/' + collection + '/' + JSON.stringify(document, null, '    '))
+        .then(getDocumentContextComplete);
+
+      function getDocumentContextComplete(response) {
+        angular.extend(service.context, response.data)
         return response.data;
       }
     }

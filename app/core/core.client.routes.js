@@ -31,11 +31,24 @@
         resolve: {
           collectionPrepService: collectionPrepService
         }
+      })
+      .state('document', {
+        url: '/db/:database/:collection/:document',
+        templateUrl: '/angular/core/views/document.view.html',
+        controller: 'DocumentController',
+        controllerAs: 'vm',
+        resolve: {
+          documentPrepService: documentPrepService
+        }
       });
   }
 
   function databasePrepService($stateParams, ContextService) {
     return ContextService.getDatabaseContext($stateParams.database);
+  }
+
+  function documentPrepService($stateParams, ContextService) {
+    return ContextService.getDocumentContext($stateParams.database, $stateParams.collection, $stateParams.document);
   }
 
   function collectionPrepService($stateParams, ContextService) {
