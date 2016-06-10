@@ -1,7 +1,7 @@
 <!-- {% block title %}{{ document._id|to_string }}{% endblock %} -->
 <!-- INSIDE THE TEXTAREA BELOW -->
 <!-- {% if settings.read_only %} readonly="readonly"{% endif %} -->
-<textarea class="col-md-12" id="document" name="document"}>{{ vm.context.ctx.docString }}</textarea>
+<ui-codemirror ui-codemirror-opts="vm.editorOptions" ng-model="vm.doc"></ui-codemirror>
 <br />
 <form method="POST" action="{{ vm.context.baseHref/db/ vm.context.dbName/vm.context.collectionName/vm.context.document._id }}">
   <div>
