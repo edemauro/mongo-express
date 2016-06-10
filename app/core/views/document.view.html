@@ -1,7 +1,6 @@
 <!-- {% block title %}{{ document._id|to_string }}{% endblock %} -->
 <!-- <form method="POST" id="documentEditForm" action="{{ baseHref }}db/{{ dbName }}/{{ collectionName }}/{{ document._id | json | safe | url_encode }}"> -->
-  <!-- {% if docLength > 10 %} -->
-<div>
+<div ng-if="vm.context.ctx.docLength > 10">
   <div ng-if="!vm.readOnly">
     <input type="hidden" name="_method" value="put">
     <button onclick="return onBackClick()" class="backButton btn btn-warning btn-large">
@@ -21,7 +20,7 @@
   </div><!-- vm.readOnly -->
 </div>
 <br />
-  <!-- {% endif %} -->
+ 
 
 <textarea class="col-md-12" id="document" name="document"{% if settings.read_only %} readonly="readonly"{% endif %}>{{ vm.context.ctx.docString }}</textarea>
 <br />
