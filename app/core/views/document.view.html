@@ -3,27 +3,16 @@
 <!-- {% if settings.read_only %} readonly="readonly"{% endif %} -->
 <ui-codemirror ui-codemirror-opts="vm.editorOptions" ng-model="vm.doc"></ui-codemirror>
 <br />
-<form method="POST" action="{{ vm.context.baseHref/db/ vm.context.dbName/vm.context.collectionName/vm.context.document._id }}">
-  <div>
-    <div ng-if="!vm.readOnly">
-      <button ng-click="vm.back()" class="backButton btn btn-warning btn-large" type="button">
-       <span class="glyphicon glyphicon-arrow-left"></span>
-        Back
-      </button>
-
-      <button type="submit" class="btn btn-success btn-large pull-right" onclick="return onSubmitClick()">
-        <span class="glyphicon glyphicon-pencil"></span>
-        Save
-      </button>
-    </div><!-- !vm.readOnly -->
-    <div ng-if="vm.readOnly">
-      <button onclick="return history.back()" class="btn btn-warning btn-large btn-block">
-       <span class="glyphicon glyphicon-arrow-left"></span>
-        Back
-      </button>
-    </div><!-- vm.readOnly -->
-  </div>
-</form>
+<div>
+  <button ng-click="vm.back()" class="backButton btn btn-warning btn-large" type="button">
+    <span class="glyphicon glyphicon-arrow-left"></span>
+    Back
+  </button>
+  <button type="submit" class="btn btn-success btn-large pull-right" ng-click="vm.updateDocument()" ng-if="!vm.context.readOnly">
+    <span class="glyphicon glyphicon-pencil"></span>
+    Save
+  </button>
+</div>
 
 <div ng-if="!vm.context.readOnly">
 <br>

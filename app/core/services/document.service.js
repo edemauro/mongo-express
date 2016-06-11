@@ -6,7 +6,8 @@
   function DocumentService($http) {
     let service = {
       addDocument: addDocument,
-      deleteDocument: deleteDocument
+      deleteDocument: deleteDocument,
+      updateDocument: updateDocument
     };
 
     return service;
@@ -30,6 +31,20 @@
         .then(deleteDocumentComplete);
 
       function deleteDocumentComplete(response) {
+        return response;
+      }
+    }
+
+    function updateDocument(db, collection, document, documentName) {
+      return $http.post('/checkValid', {document: document})
+        .then(documentCheckComplete)
+        .then(updateDocumentComplete);
+
+      function documentCheckComplete(response) {
+        return $http.put('/api/db/' + db + '/' + collection + '/' + JSON.stringify(documentName, null, '    '), {document: document});
+      }
+
+      function updateDocumentComplete(response)  {
         return response;
       }
     }

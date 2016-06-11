@@ -5,7 +5,7 @@
     .module('app')
     .controller('DocumentController', DocumentController);
 
-  function DocumentController(ContextService, $stateParams, $state) {
+  function DocumentController(ContextService, $stateParams, $state, DocumentService) {
     let vm = this;
     
     vm.context = ContextService.context;
@@ -19,6 +19,7 @@
       readOnly: vm.context.readOnly
     };
     vm.back = back;
+    vm.updateDocument = updateDocument;
 
     function back() {
       if(confirm('Are you sure you wish to go back?')) {
@@ -27,6 +28,13 @@
           'collection': $stateParams.collection
         });
       }
+    }
+
+    function updateDocument() {
+      return DocumentService.updateDocument($stateParams.database, $stateParams.collection, vm.doc, $stateParams.document)
+        .then((response) => {
+          console.log(response);
+        })
     }
 
     // console.log(vm.context);
