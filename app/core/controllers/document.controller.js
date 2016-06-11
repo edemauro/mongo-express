@@ -5,7 +5,7 @@
     .module('app')
     .controller('DocumentController', DocumentController);
 
-  function DocumentController(ContextService, $stateParams) {
+  function DocumentController(ContextService, $stateParams, $state) {
     let vm = this;
     
     vm.context = ContextService.context;
@@ -18,7 +18,17 @@
       matchBrackets: true,
       readOnly: vm.context.readOnly
     };
+    vm.back = back;
 
-    console.log(vm.context);
+    function back() {
+      if(confirm('Are you sure you wish to go back?')) {
+        $state.go('collection', {
+          'database': $stateParams.database,
+          'collection': $stateParams.collection
+        });
+      }
+    }
+
+    // console.log(vm.context);
   }
 })();

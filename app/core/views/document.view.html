@@ -6,8 +6,7 @@
 <form method="POST" action="{{ vm.context.baseHref/db/ vm.context.dbName/vm.context.collectionName/vm.context.document._id }}">
   <div>
     <div ng-if="!vm.readOnly">
-      <input type="hidden" name="_method" value="put">
-      <button onclick="return onBackClick()" class="backButton btn btn-warning btn-large">
+      <button ng-click="vm.back()" class="backButton btn btn-warning btn-large" type="button">
        <span class="glyphicon glyphicon-arrow-left"></span>
         Back
       </button>

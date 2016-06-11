@@ -1,35 +1,4 @@
 <script>
-'use strict';
-  var doc = CodeMirror.fromTextArea(document.getElementById('document'), {
-    mode: {
-      name: 'javascript',
-      json: true,
-    },
-    indentUnit: 4,
-    lineNumbers: true,
-    autoClearEmptyLines: true,
-    matchBrackets: true,
-    {% if settings.read_only %}
-    readOnly: true,
-    {% endif %}
-    theme: "{{ editorTheme }}"
-  });
-
-  function onBackClick() {
-    // "Back" button is clicked
-
-    if (doc.isClean()) {
-      history.back();
-    } else if ($('#discardChanges').length === 0){
-      $('#pageTitle').parent().append('<div id="discardChanges" class="alert alert-warning"><strong>Document has changed! Are you sure you wish to go back?</strong></div>');
-      $('.backButton').text('Back & Discard Changes')
-    } else {
-      history.back();
-    }
-
-    return false;
-  }
-
   function onSubmitClick() {
     // Save button is clicked
 
