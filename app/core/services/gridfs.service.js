@@ -15,7 +15,15 @@
       const fd = new FormData();
       fd.append('file', file);
 
-      return $http.post('/db/' + db + '/gridFS/' + bucket + '/');
+      return $http.post('/db/' + db + '/gridFS/' + bucket + '/', fd, {
+        transformRequest: angular.identity,
+        headers: {'Content-Type': undefined}
+      })
+        .then(addFileComplete);
+
+      function addFileComplete(response) {
+        return response;
+      }
     }
 
     function deleteFile(db, bucket, file) {

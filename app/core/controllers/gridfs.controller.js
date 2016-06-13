@@ -16,7 +16,9 @@
       return GridfsService.addFile($stateParams.database, $stateParams.bucket, vm.file)
         .then((response) => {
           console.log(response);
-
+          $state.go('database',{
+            'database': $stateParams.database
+          });
         });
     }
 
@@ -25,8 +27,8 @@
         .then((response) => {
           console.log(response);
           $state.go('database',{
-              'database': $stateParams.database
-            });
+            'database': $stateParams.database
+          });
         })
     }
 
