@@ -18,6 +18,7 @@
       vm.loadDocument = loadDocument;
       vm.deleteDocument = deleteDocument;
       vm.compact = compact;
+      vm.searchValue = "";
 
       ContextService.setActiveTemplate(3);
 

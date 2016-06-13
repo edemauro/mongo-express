@@ -1,4 +1,4 @@
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 'use strict';
 function getParameterByName(name) { name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]"); var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"), results = regex.exec(location.search); return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " ")); }
 jQuery(document).ready(function($) {
@@ -7,7 +7,7 @@ jQuery(document).ready(function($) {
     $('#tabs a[href="#advanced"]').tab('show');
   }
 });
-</script>
+</script> -->
 
 <style type="text/css">
   li.uib-tab {
@@ -30,19 +30,20 @@ jQuery(document).ready(function($) {
     </uib-tab-heading>
     <div class="well">
       <div class="row">
-        <div class="form-group col-sm-6 col-md-4">
-          <input style="width:100%;" class="input-medium form-control" type="text" id="key" name="key" placeholder="Key" title="Key" value="{{ key }}">
+        <!-- <div class="form-group col-sm-6 col-md-4">
+          <input style="width:100%;" class="input-medium form-control" type="text" id="key" name="key" placeholder="Key" title="Key">
+        </div> -->
+        <div class="form-group col-sm-12">
+          <input style="width:100%;" class="input-medium form-control" type="text" placeholder="Search" ng-model="vm.searchValue">
         </div>
-        <div class="form-group col-sm-6 col-md-4">
-          <input style="width:100%;" class="input-medium form-control" type="text" id="value" name="value" placeholder="Value" title="Value" value="{{ value }}">
-        </div>
-        <div class="form-group col-sm-6 col-md-2">
-          <select name="type" class="form-control">
-            <option value="S" {% if type == 'S' %}selected {% endif %}>String</option>
-            <option value="R" {% if type == 'R' %}selected {% endif %}>Regex</option>
-            <option value="J" {% if type == 'J' %}selected {% endif %}>JSON, bool</option>
-            <option value="N" {% if type == 'N' %}selected {% endif %}>Number</option>
-            <option value="O" {% if type == 'O' %}selected {% endif %}>ObjectID</option>
+        <!-- <div class="form-group col-sm-6 col-md-2">
+          <select name="type" class="form-control"> -->
+          <!-- {% if type == 'S' %}selected {% endif %} -->
+           <!--  <option value="S">String</option>
+            <option value="R">Regex</option>
+            <option value="J">JSON, bool</option>
+            <option value="N">Number</option>
+            <option value="O">ObjectID</option>
           </select>
         </div>
         <div class="form-group col-sm-6 col-md-2">
@@ -50,11 +51,11 @@ jQuery(document).ready(function($) {
             <span class="glyphicon glyphicon-search"></span>
             Find
           </button>
-        </div>
+        </div> -->
       </div>
     </div>
   </uib-tab>
-  <uib-tab classes="text-center">
+  <!-- <uib-tab classes="text-center">
     <uib-tab-heading>
       <span class="glyphicon glyphicon-tags"></span> Advanced
     </uib-tab-heading>
@@ -74,7 +75,7 @@ jQuery(document).ready(function($) {
         </div>
       </div>
     </div>
-  </uib-tab>
+  </uib-tab> -->
 </uib-tabset>
 
 <script type="text/ng-template" id="addDocumentModalContent.html">
@@ -107,7 +108,7 @@ jQuery(document).ready(function($) {
       </th>
     </thead>
     <tbody>
-      <tr ng-repeat="doc in vm.context.ctx.docs.slice(((vm.currentPage-1)*vm.itemsPerPage), ((vm.currentPage)*vm.itemsPerPage))" ng-click="vm.loadDocument(doc._id)">
+      <tr ng-repeat="doc in vm.context.ctx.docs.slice(((vm.currentPage-1)*vm.itemsPerPage), ((vm.currentPage)*vm.itemsPerPage)) | filter: vm.searchValue" ng-click="vm.loadDocument(doc._id)">
         <td ng-repeat="(key, value) in doc">
           <button type="submit" class="btn btn-danger" ng-if="key=='_id' && !vm.context.readOnly && vm.context.collectionName !='system.indexes'" ng-click="vm.deleteDocument(value);$event.stopPropagation()">
             <span class="glyphicon glyphicon-trash"></span>
