@@ -45,6 +45,7 @@
   <script src="{{ baseHref }}angular/core/core.client.module.js"></script>
   <script src="{{ baseHref }}angular/core/core.client.routes.js"></script>
   <script src="{{ baseHref }}angular/core/controllers/index.controller.js"></script>
+  <script src="{{ baseHref }}angular/core/controllers/alert.controller.js"></script>
   <script src="{{ baseHref }}angular/core/controllers/gridfs.controller.js"></script>
   <script src="{{ baseHref }}angular/core/controllers/header.controller.js"></script>
   <script src="{{ baseHref }}angular/core/controllers/database.controller.js"></script>
@@ -67,7 +68,7 @@
 <nav ng-include src="'angular/core/views/header.client.view.html'" class="navbar navbar-default navbar-fixed-top"></nav>
 
 <!-- ADD IN ALERTS -->
-<div class="container">
+<div class="container" ng-controller="AlertController as vm">
   <div class="row">
     <div class="col-md-12">
       <div class="page-header main-title">
