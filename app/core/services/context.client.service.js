@@ -26,6 +26,7 @@
       getDocumentContext: getDocumentContext,
       getDatabaseContext: getDatabaseContext,
       getCollectionContext: getCollectionContext,
+      getGridfsContext: getGridfsContext,
       templates: templates,
       getActiveTemplate: getActiveTemplate,
       setActiveTemplate: setActiveTemplate
@@ -39,6 +40,16 @@
 
       function getIndexComplete(response) {
         angular.extend(service.context, response.data);
+      }
+    }
+
+    function getGridfsContext(db, bucket) {
+      return $http.get('/api/db/' + db + '/gridFS/' + bucket)
+        .then(getDatabaseContextComplete);
+
+      function getGridfsContext(response) {
+        angular.extend(service.context, response.data);
+        return response.data;
       }
     }
 

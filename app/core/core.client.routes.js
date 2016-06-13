@@ -40,7 +40,20 @@
         resolve: {
           documentPrepService: documentPrepService
         }
-      });
+      })
+      .state('gridfs', {
+        url: '/db/:database/gridFS/:bucket',
+        templateUrl: '/angular/core/views/gridfs.view.html',
+        controller: 'GridfsController',
+        controllerAs: 'vm',
+        resolve: {
+          gridfsPrepService: gridfsPrepService
+        }
+      })
+  }
+
+  function gridfsPrepService($stateParams, ContextService) {
+    return ContextService.getGridfsContext($stateParams.database, $stateParams.bucket);
   }
 
   function databasePrepService($stateParams, ContextService) {
