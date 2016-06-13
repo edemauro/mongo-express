@@ -13,14 +13,12 @@
 </div>
 
 <div ng-if="!vm.context.readOnly">
-<br>
-  <form method="POST" action="{{ vm.context.baseHref/db/ vm.context.dbName/vm.context.collectionName/vm.context.document._id }}">
-    <input type="hidden" name="_method" value="delete">
-    <button type="submit" class="btn btn-danger">
-      <span class="glyphicon glyphicon-trash"></span>
-      Delete
-    </button>
-  </form>
+  <br>
+  <input type="hidden" name="_method" value="delete">
+  <button type="submit" class="btn btn-danger" ng-click="vm.deleteDocument()">
+    <span class="glyphicon glyphicon-trash"></span>
+    Delete
+  </button>
 </div>
 
 

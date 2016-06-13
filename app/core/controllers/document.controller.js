@@ -20,6 +20,7 @@
     };
     vm.back = back;
     vm.updateDocument = updateDocument;
+    vm.deleteDocument = deleteDocument;
 
     function back() {
       if(confirm('Are you sure you wish to go back?')) {
@@ -30,6 +31,16 @@
       }
     }
 
+    function deleteDocument() {
+        return DocumentService.deleteDocument($stateParams.database, $stateParams.collection, $stateParams.document)
+          .then(() => {
+            $state.go('collection', {
+              'database': $stateParams.database,
+              'collection': $stateParams.collection
+            });
+          });
+      }
+
     function updateDocument() {
       return DocumentService.updateDocument($stateParams.database, $stateParams.collection, vm.doc, $stateParams.document)
         .then((response) => {
@@ -39,7 +50,5 @@
           });
         })
     }
-
-    // console.log(vm.context);
   }
 })();
