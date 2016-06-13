@@ -1,4 +1,10 @@
 <!-- {% block title %}{{ bucketName }}{% endblock %} -->
+<style>
+  td > a {
+
+  }
+</style>
+
 <p class="well" ng-if="!vm.context.ctx.files.length">
   No files found.
 </p>
@@ -6,25 +12,32 @@
 <div class="table-responsive tableWrapper" ng-if="vm.context.ctx.files.length">
   <table class="table table-striped">
     <thead>
+      <th>
+        Download
+      </th>
       <th ng-repeat="column in vm.context.ctx.columns">
         {{ column }}
       </th>
       <th ng-if="!vm.context.readOnly">Delete</th>
     </thead>
     <tbody>
-      <!-- onclick="loadFile('{{ file._id | json | safe | url_encode }}')" -->
-      <!-- location.href = '{{ baseHref }}db/{{ dbName }}/gridFS/{{ bucketName }}/' + encodeURIComponent(id); -->
-      <tr ng-repeat="file in vm.context.ctx.files">
+      <tr ng-repeat="file in vm.context.ctx.files" >
+        <td>
+          <a ng-href='{{ vm.context.baseHref }}db/{{ vm.context.dbName }}/gridFS/{{ vm.context.bucketName }}/"{{ file._id }}"' class="btn btn-success btn-block">
+            <span class="glyphicon glyphicon-floppy-save"></span>
+            <br>Download
+          </a>
+        </td>
         <td ng-repeat="column in vm.context.ctx.columns">
-          {{ file[column] }}
+            {{ file[column] }}
         </td>
         <td ng-if="!vm.context.readOnly">
-            <div class="col-md-1">
-              <button type="submit" class="btn btn-danger" ng-click="vm.deleteFile(file._id);$event.stopPropagation()">
-                <span class="glyphicon glyphicon-trash"></span>
-              </button>
-            </div>
-          </td>
+          <div class="col-md-1">
+            <button type="submit" class="btn btn-danger" ng-click="vm.deleteFile(file._id);$event.stopPropagation()">
+              <span class="glyphicon glyphicon-trash"></span>
+            </button>
+          </div>
+        </td>
       </tr>
     </tbody>
   </table>
@@ -33,7 +46,6 @@
 <div class="row" ng-if="!vm.context.readOnly">
   <div class="col-md-12">
     <h2>Add File</h2>
-    <!-- <form method="POST" action="{{ baseHref }}db/{{ dbName }}/gridFS/{{ bucketName }}/" enctype="multipart/form-data" class="well form-inline"> -->
     <div class="form-group">
       <input type="file" class="input-medium span7" file-input="vm.file">
     </div>
