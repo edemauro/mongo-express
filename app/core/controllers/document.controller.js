@@ -33,7 +33,10 @@
     function updateDocument() {
       return DocumentService.updateDocument($stateParams.database, $stateParams.collection, vm.doc, $stateParams.document)
         .then((response) => {
-          console.log(response);
+          $state.go('collection', {
+            'database': $stateParams.database,
+            'collection': $stateParams.collection
+          });
         })
     }
 
