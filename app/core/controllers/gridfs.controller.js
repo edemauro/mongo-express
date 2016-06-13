@@ -5,19 +5,23 @@
     .module('app')
     .controller('GridfsController', GridfsController);
 
-  function GridfsController(ContextService, $stateParams, DocumentService, $state) {
+  function GridfsController(ContextService, $stateParams, GridfsService, $state) {
     let vm = this;
 
     vm.addFile = addFile;
     vm.context = ContextService.context;
-    vm.deleteBucketFile = deleteBucketFile;
+    vm.deleteFile = deleteFile;
 
     function addFile() {
-      
+      return GridfsService.addFile($stateParams.database, $stateParams.bucket, vm.file)
+        .then((response) => {
+          console.log(response);
+
+        });
     }
 
-    function deleteBucketFile(file) {
-      return DocumentService.deleteBucketFile($stateParams.database, $stateParams.bucket, file)
+    function deleteFile(file) {
+      return GridfsService.deleteFile($stateParams.database, $stateParams.bucket, file)
         .then((response) => {
           console.log(response);
           $state.go('database',{
