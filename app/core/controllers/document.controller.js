@@ -22,6 +22,8 @@
     vm.updateDocument = updateDocument;
     vm.deleteDocument = deleteDocument;
 
+    ContextService.setActiveTemplate(1);
+
     function back() {
       if(confirm('Are you sure you wish to go back?')) {
         $state.go('collection', {
