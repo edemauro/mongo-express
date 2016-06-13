@@ -1,1 +1,30 @@
-GRID FS
+<!-- {% block title %}{{ bucketName }}{% endblock %} -->
+<p class="well" ng-if="!vm.context.ctx.files.length">
+  No files found.
+</p>
+
+<div class="table-responsive tableWrapper" ng-if="vm.context.ctx.files.length">
+  <table class="table table-striped">
+    <thead>
+      <th ng-repeat="column in vm.context.ctx.columns">
+        {{ column }}
+      </th>
+      <th ng-if="!vm.context.readOnly">Delete</th>
+    </thead>
+    <tbody>
+      <!-- ng-click loadfile -->
+      <tr ng-repeat="file in vm.context.ctx.files">
+        <td ng-repeat="column in vm.context.ctx.columns">
+          {{ file[column] }}
+        </td>
+        <td ng-if="!vm.context.readOnly">
+            <div class="col-md-1">
+              <button type="submit" class="btn btn-danger" ng-click="vm.deleteBucketFile(file._id);$event.stopPropagation()">
+                <span class="glyphicon glyphicon-trash"></span>
+              </button>
+            </div>
+          </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

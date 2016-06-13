@@ -7,7 +7,8 @@
     let service = {
       addDocument: addDocument,
       deleteDocument: deleteDocument,
-      updateDocument: updateDocument
+      updateDocument: updateDocument,
+      deleteBucketFile: deleteBucketFile
     };
 
     return service;
@@ -22,6 +23,15 @@
       }
 
       function addDocumentComplete(response) {
+        return response;
+      }
+    }
+
+    function deleteBucketFile(db, bucket, file) {
+      return $http.delete('/db/' + db + '/gridFS/' + bucket + '/' + JSON.stringify(file, null, '    '))
+        .then(deleteBucketFileComplete);
+
+      function deleteBucketFileComplete(response) {
         return response;
       }
     }

@@ -3,12 +3,6 @@
 {% block title %}{{ bucketName }}{% endblock %}
 
 {% block content %}
-  {% if files.length == 0 %}
-    <p class="well">
-      No files found.
-    </p>
-  {% else %}
-
   <div class="table-responsive tableWrapper">
     <table class="table table-striped">
       <thead>
