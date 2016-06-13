@@ -10,13 +10,13 @@
     $stateProvider
       .state('index', {
         url: '/',
-        templateUrl: '/angular/core/views/index.client.view.html',
+        templateUrl: '/angular/core/views/index.view.html',
         controller: 'IndexController',
         controllerAs: 'vm'
       })
       .state('database', {
         url: '/db/:database',
-        templateUrl: '/angular/core/views/database.client.view.html',
+        templateUrl: '/angular/core/views/database.view.html',
         controller: 'DatabaseController',
         controllerAs: 'vm',
         resolve: {
@@ -25,7 +25,7 @@
       })
       .state('collection', {
         url: '/db/:database/:collection',
-        templateUrl: '/angular/core/views/collection.client.view.html',
+        templateUrl: '/angular/core/views/collection.view.html',
         controller: 'CollectionController',
         controllerAs: 'vm',
         resolve: {

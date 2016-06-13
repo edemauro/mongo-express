@@ -7,16 +7,16 @@
     let prefix = 'angular/core/views/partials/';
     let templates = [
       {
-        url: prefix + '_index.header.client.tpl.html'
+        url: prefix + '_index.header.html'
       },
       {
-        url: prefix + '_document.header.client.tpl.html'
+        url: prefix + '_document.header.html'
       },
       {
-        url: prefix + '_gridfs.header.client.tpl.html'
+        url: prefix + '_gridfs.header.html'
       },
       {
-        url: prefix + '_collection.header.client.tpl.html'
+        url: prefix + '_collection.header.html'
       }
     ];
     let activeTemplate = templates[0];
