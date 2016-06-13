@@ -35,7 +35,7 @@
     <h2>Add File</h2>
     <!-- <form method="POST" action="{{ baseHref }}db/{{ dbName }}/gridFS/{{ bucketName }}/" enctype="multipart/form-data" class="well form-inline"> -->
     <div class="form-group">
-      <input type="file" class="input-medium span7" name="filefield">
+      <input type="file" class="input-medium span7" file-input="vm.file">
     </div>
     <button type="submit" class="btn btn-success pull-right" ng-click="vm.addFile()">
       <span class="glyphicon glyphicon-upload"></span>
