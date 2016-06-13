@@ -32,15 +32,6 @@
           collectionPrepService: collectionPrepService
         }
       })
-      .state('document', {
-        url: '/db/:database/:collection/:document',
-        templateUrl: '/angular/core/views/document.view.html',
-        controller: 'DocumentController',
-        controllerAs: 'vm',
-        resolve: {
-          documentPrepService: documentPrepService
-        }
-      })
       .state('gridfs', {
         url: '/db/:database/gridFS/:bucket',
         templateUrl: '/angular/core/views/gridfs.view.html',
@@ -50,6 +41,15 @@
           gridfsPrepService: gridfsPrepService
         }
       })
+      .state('document', {
+        url: '/db/:database/:collection/:document',
+        templateUrl: '/angular/core/views/document.view.html',
+        controller: 'DocumentController',
+        controllerAs: 'vm',
+        resolve: {
+          documentPrepService: documentPrepService
+        }
+      });
   }
 
   function gridfsPrepService($stateParams, ContextService) {

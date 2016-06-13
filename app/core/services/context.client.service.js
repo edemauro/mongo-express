@@ -45,7 +45,7 @@
 
     function getGridfsContext(db, bucket) {
       return $http.get('/api/db/' + db + '/gridFS/' + bucket)
-        .then(getDatabaseContextComplete);
+        .then(getGridfsContext);
 
       function getGridfsContext(response) {
         angular.extend(service.context, response.data);
