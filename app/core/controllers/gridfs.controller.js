@@ -12,6 +12,8 @@
     vm.context = ContextService.context;
     vm.deleteFile = deleteFile;
 
+    ContextService.setActiveTemplate(2);
+
     function addFile() {
       return GridfsService.addFile($stateParams.database, $stateParams.bucket, vm.file)
         .then((response) => {
