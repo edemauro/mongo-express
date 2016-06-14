@@ -65,32 +65,17 @@
 </head>
 
 <body ng-app="app">
-<nav ng-include src="'angular/core/views/header.client.view.html'" class="navbar navbar-default navbar-fixed-top"></nav>
+<nav ng-include src="'angular/core/views/header.view.html'" class="navbar navbar-default navbar-fixed-top"></nav>
 
-<!-- ADD IN ALERTS -->
-<div class="container" ng-controller="AlertController as vm">
+<div class="container">
   <div class="row">
     <div class="col-md-12">
       <div class="page-header main-title">
         <h1 id="pageTitle">{{ title }}</h1>
-      </div>
-
-      <!-- {% if messageSuccess %}
-      <div class="alert alert-success">
-        <button class="close" data-dismiss="alert">×</button>
-        <strong>{{ messageSuccess }}</strong>
-      </div>
-      {% endif %}
-
-      {% if messageError %}
-      <div class="alert alert-danger">
-        <button class="close" data-dismiss="alert">×</button>
-        <strong>{{ messageError }}</strong>
-      </div>
-      {% endif %} -->
-
-    </div>
-  </div>
+        <div ng-include src="'angular/core/views/partials/_alerts.html'"></div>
+      </div><!-- page-header main-title -->
+    </div><!-- col-md-12 -->
+  </div><!-- row -->
 
   <div class="row">
     <div class="col-md-12">
