@@ -29,7 +29,8 @@
 
       function addDatabaseComplete(response) {
         ContextService.addAlert({type: 'success', msg: response.message });
-        
+        vm.database = "";
+
         return ContextService.getIndex()
           .then(() => {
             vm.context = ContextService.context;
@@ -55,13 +56,12 @@
       });
 
       modalInstance.result.then((response) => {
+        ContextService.addAlert({type: response.type, msg: response.message });
+        
         return ContextService.getIndex()
-          .then((response) => {
-            console.log(response);
+          .then(() => {
             vm.context = ContextService.context;
           });
-      }, () => {
-        console.log('Modal dismissed at: ' + new Date());
       });
     };
   };

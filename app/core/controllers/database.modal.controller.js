@@ -18,9 +18,11 @@
       if(vm.dbConfirm === vm.database) {
         DatabaseService.deleteDatabase(db)
           .then((response) => {
+            response.type = 'success';
             $uibModalInstance.close(response);
           })
           .catch((response) => {
+            response.type = 'danger';
             $uibModalInstance.close(response);
           });
       } else {
