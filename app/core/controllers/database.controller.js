@@ -20,10 +20,10 @@
 
       function addCollection() {
         CollectionService.addCollection($stateParams.database, vm.collection)
-          .then(addCollectionComplete)
+          .then(addCollectionCompleted)
           .catch(addCollectionFailed);
 
-        function addCollectionComplete(response) {
+        function addCollectionCompleted(response) {
           ContextService.addAlert({type: 'success', msg: response.message });
           vm.collection = "";
 

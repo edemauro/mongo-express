@@ -33,12 +33,8 @@
           controller: 'DocumentModalController',
           controllerAs: 'vm',
           resolve: {
-            db: () => {
-              return $stateParams.database;
-            },
-            collection: () => {
-              return $stateParams.collection;
-            }
+            db: () => { return $stateParams.database; },
+            collection: () => { return $stateParams.collection; }
           }
         });
 
@@ -52,26 +48,16 @@
 
       function compact() {
         return CollectionService.compactCollection($stateParams.database, $stateParams.collection)
-          .then(compactCollectionComplete)
+          .then(compactCollectionCompleted)
           .catch(compactCollectionFailed);
 
-        function compactCollectionComplete(response) {
+        function compactCollectionCompleted(response) {
           ContextService.addAlert({type: 'success', msg: 'collection compacted!' });
         }
 
         function compactCollectionFailed(response) {
           ContextService.addAlert({type: 'danger', msg: response.message });
         }
-      }
-
-      function deleteDocument(id) {
-        return DocumentService.deleteDocument($stateParams.database, $stateParams.collection, id)
-          .then(() => {
-            return ContextService.getCollectionContext($stateParams.database, $stateParams.collection)
-              .then(() => {
-                vm.context = ContextService.context;
-              });
-          });
       }
 
       function deleteCollection() {
@@ -81,27 +67,32 @@
           controller: 'CollectionModalController',
           controllerAs: 'vm',
           resolve: {
-            db: () => {
-              return $stateParams.database;
-            },
-            collection: () => {
-              return $stateParams.collection;
-            }
+            db: () => { return $stateParams.database; },
+            collection: () => { return $stateParams.collection; }
           }
         });
 
         modalInstance.result.then((response) => {
+          ContextService.addAlert({type: response.type, msg: response.message });
           $state.go('database', { 'database': $stateParams.database });
-        }, () => {
-          console.log('Modal dismissed at: ' + new Date());
         });
       }
 
-      function renameCollection() {
-        return CollectionService.renameCollection($stateParams.database, $stateParams.collection, vm.name)
-          .then(() => {
-            $state.go('database', { 'database': $stateParams.database });
-          });
+      function deleteDocument(id) {
+        return DocumentService.deleteDocument($stateParams.database, $stateParams.collection, id)
+          .then(deleteDocumentCompleted)
+          .catch(deleteDocumentFailed);
+
+        function deleteDocumentCompleted(response) {
+          ContextService.addAlert({type: 'success', msg: response.message });
+
+          return ContextService.getCollectionContext($stateParams.database, $stateParams.collection)
+            .then(() => { vm.context = ContextService.context; });
+        }
+
+        function deleteDocumentFailed(response) {
+          ContextService.addAlert({type: 'danger', msg: response.message });
+        }
       }
 
       function loadDocument(id) {
@@ -110,6 +101,21 @@
           'collection': $stateParams.collection,
           'document': id
         });
+      }
+
+      function renameCollection() {
+        return CollectionService.renameCollection($stateParams.database, $stateParams.collection, vm.name)
+          .then(renameCollectionCompleted)
+          .catch(renameCollectionFailed);
+
+        function renameCollectionCompleted(response) {
+          ContextService.addAlert({type: 'success', msg: response.message });
+          $state.go('database', { 'database': $stateParams.database });
+        }
+
+        function renameCollectionFailed(response) {
+          ContextService.addAlert({type: 'danger', msg: response.message });
+        }
       }
     }
 })();

@@ -7,13 +7,18 @@
 
   function HeaderController(ContextService, $scope, $state) {
     let vm = this;
+
     vm.context = ContextService.context;
-    vm.activeTemplate = ContextService.getActiveTemplate();
 
-    $scope.$on('$stateChangeSuccess', stateChangeSuccess);
+    activate();
 
-    function stateChangeSuccess() {
+    function activate() {
       vm.activeTemplate = ContextService.getActiveTemplate();
+      $scope.$on('$stateChangeSuccess', stateChangeSuccess);
+
+      function stateChangeSuccess() {
+        vm.activeTemplate = ContextService.getActiveTemplate();
+      }
     }
-  };
+  }
 })();

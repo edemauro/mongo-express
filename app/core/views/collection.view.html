@@ -186,7 +186,8 @@ jQuery(document).ready(function($) {
     </p>
     <p>
       <label for="confirmation-input">Type the collection name to proceed.</label>
-      <input type="text" id="confirmation-input" name="confirmation-input" ng-model="vm.collectionConfirm" />
+      <input type="text" id="confirmation-input" name="confirmation-input" ng-model="vm.collectionConfirm" required />
+      <p ng-show="vm.collectionConfirm !== vm.collection && vm.showMessage" class="help-block">Collection name does not match.</p>
     </p>
   </div>
   <div class="modal-footer">

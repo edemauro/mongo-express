@@ -8,7 +8,9 @@
   function DocumentController(ContextService, $stateParams, $state, DocumentService) {
     let vm = this;
     
+    vm.back = back;
     vm.context = ContextService.context;
+    vm.deleteDocument = deleteDocument;
     vm.doc = vm.context.ctx.docString;
     vm.editorOptions = { 
       mode: { name: 'javascript', json: true },
@@ -18,11 +20,13 @@
       matchBrackets: true,
       readOnly: vm.context.readOnly
     };
-    vm.back = back;
     vm.updateDocument = updateDocument;
-    vm.deleteDocument = deleteDocument;
 
-    ContextService.setActiveTemplate(1);
+    activate();
+
+    function activate() {
+      ContextService.setActiveTemplate(1); 
+    }
 
     function back() {
       if(confirm('Are you sure you wish to go back?')) {
@@ -35,22 +39,40 @@
 
     function deleteDocument() {
         return DocumentService.deleteDocument($stateParams.database, $stateParams.collection, $stateParams.document)
-          .then(() => {
-            $state.go('collection', {
-              'database': $stateParams.database,
-              'collection': $stateParams.collection
-            });
-          });
-      }
+          .then(deleteDocumentCompleted)
+          .catch(deleteDocumentFailed);
 
-    function updateDocument() {
-      return DocumentService.updateDocument($stateParams.database, $stateParams.collection, vm.doc, $stateParams.document)
-        .then((response) => {
+        function deleteDocumentCompleted(response) {
+          ContextService.addAlert({type: 'success', msg: response.message });
+
           $state.go('collection', {
             'database': $stateParams.database,
             'collection': $stateParams.collection
           });
-        })
+        }
+
+        function deleteDocumentFailed(response) {
+          ContextService.addAlert({type: 'danger', msg: response.message });
+        }
+      }
+
+    function updateDocument() {
+      return DocumentService.updateDocument($stateParams.database, $stateParams.collection, vm.doc, $stateParams.document)
+        .then(updateDocumentCompleted)
+        .catch(updateDocumentFailed);
+
+      function updateDocumentCompleted(response) {
+          ContextService.addAlert({type: 'success', msg: response.message });
+
+          $state.go('collection', {
+            'database': $stateParams.database,
+            'collection': $stateParams.collection
+          });
+        }
+
+        function updateDocumentFailed(response) {
+          ContextService.addAlert({type: 'danger', msg: response.message });
+        }
     }
   }
 })();

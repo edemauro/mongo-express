@@ -28,10 +28,10 @@
 
     function addDb() {
       return DatabaseService.addDatabase(vm.database)
-        .then(addDatabaseComplete)
+        .then(addDatabaseCompleted)
         .catch(addDatabaseFailed);
 
-      function addDatabaseComplete(response) {
+      function addDatabaseCompleted(response) {
         ContextService.addAlert({type: 'success', msg: response.message });
         vm.database = "";
 
@@ -51,9 +51,7 @@
         controller: 'ModalController',
         controllerAs: 'vm',
         resolve: {
-          db: () => {
-            return db;
-          }
+          db: () => { return db; }
         }
       });
 
