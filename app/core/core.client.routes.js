@@ -2,7 +2,8 @@
   'use strict';
 
   angular.module('app')
-    .config(config);
+    .config(config)
+    .run(run);
 
   function config($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise("/");
@@ -50,6 +51,17 @@
           documentPrepService: documentPrepService
         }
       });
+  }
+
+  function run($rootScope, $state) {
+    $rootScope.$on('$stateChangeError', stateChangeError)
+
+    function stateChangeError(event, toState, toParams, fromState, fromParams) {
+      let msg = 'Error routing to' + toState + '.';
+      console.log(msg);
+      ContextService.addAlert({type: 'danger', msg: msg});
+      $state.go('index');
+    }
   }
 
   function collectionPrepService($stateParams, ContextService) {
