@@ -21,6 +21,7 @@
     ];
     let activeTemplate = templates[0];
     let service = {
+      alerts: [],
       context: {},
       getIndex: getIndex,
       getDocumentContext: getDocumentContext,
@@ -29,10 +30,20 @@
       getGridfsContext: getGridfsContext,
       templates: templates,
       getActiveTemplate: getActiveTemplate,
-      setActiveTemplate: setActiveTemplate
+      setActiveTemplate: setActiveTemplate,
+      addAlert: addAlert,
+      closeAlert: closeAlert
     };
 
     return service;
+
+    function addAlert(alert) {
+      service.alerts.push(alert);
+    }
+
+    function closeAlert(index) {
+      service.alerts.splice(index, 1);
+    }
 
     function getIndex() {
       return $http.get('/api/index')

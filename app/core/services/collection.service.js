@@ -3,7 +3,7 @@
     .module('app')
     .factory('CollectionService', CollectionService);
 
-  function CollectionService($http) {
+  function CollectionService($http, $q) {
     let service = {
       deleteCollection: deleteCollection,
       exportCollection: exportCollection,
@@ -16,10 +16,20 @@
 
     function addCollection(db, collection) {
       return $http.post('/api/db/' + db, {collection: collection})
-        .then(addCollectionComplete);
+        .then(addCollectionComplete)
+        .catch(addCollectionFailed);
 
       function addCollectionComplete(response) {
-        return response;
+        return response.data;
+      }
+
+      function addCollectionFailed(e) {
+        let newMessage = 'XHR Failed for addCollection';
+        if(e.data && e.data.message) {
+          newMessage = newMessage + '\n' + e.data.message;
+        }
+        e.data.message = newMessage;
+        return $q.reject(e);
       }
     }
 

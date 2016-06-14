@@ -24,12 +24,21 @@
 
     function addDb() {
       DatabaseService.addDatabase(vm.database)
-        .then(() => {
-           return ContextService.getIndex()
-            .then(() => {
-              vm.context = ContextService.context;
-            });
-        });
+        .then(addDatabaseComplete)
+        .catch(addDatabaseFailed);
+
+      function addDatabaseComplete(response) {
+        ContextService.addAlert({type: 'success', msg: response.message });
+        
+        return ContextService.getIndex()
+          .then(() => {
+            vm.context = ContextService.context;
+          });
+      }
+
+      function addDatabaseFailed(response) {
+        ContextService.addAlert({type: 'danger', msg: response.message });
+      }
     }
 
     function deleteDb(db) {
@@ -47,7 +56,8 @@
 
       modalInstance.result.then((response) => {
         return ContextService.getIndex()
-          .then(() => {
+          .then((response) => {
+            console.log(response);
             vm.context = ContextService.context;
           });
       }, () => {
