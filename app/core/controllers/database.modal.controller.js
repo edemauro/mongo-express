@@ -12,14 +12,19 @@
     vm.dbConfirm = "";
     vm.deleteDb = deleteDb;
     vm.close = close;
+    vm.showMessage = false;
 
     function deleteDb() {
       if(vm.dbConfirm === vm.database) {
         DatabaseService.deleteDatabase(db)
           .then((response) => {
             $uibModalInstance.close(response);
+          })
+          .catch((response) => {
+            $uibModalInstance.close(response);
           });
       } else {
+        vm.showMessage = true;
         console.log('they do not match!');
       }
     };
