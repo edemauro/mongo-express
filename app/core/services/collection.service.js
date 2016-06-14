@@ -5,11 +5,11 @@
 
   function CollectionService($http, $q) {
     let service = {
+      addCollection: addCollection,
+      compactCollection: compactCollection,
       deleteCollection: deleteCollection,
       exportCollection: exportCollection,
-      addCollection: addCollection,
       renameCollection: renameCollection,
-      compactCollection: compactCollection
     };
 
     return service;
@@ -17,61 +17,65 @@
     function addCollection(db, collection) {
       return $http.post('/api/db/' + db, {collection: collection})
         .then(addCollectionComplete)
-        .catch(addCollectionFailed);
+        .catch((e) => {
+          exception.catcher('XHR failed for addCollection')(e);
+          return $q.reject(e.data);
+        });
 
       function addCollectionComplete(response) {
         return response.data;
-      }
-
-      function addCollectionFailed(e) {
-        let newMessage = 'XHR Failed for addCollection';
-        if(e.data && e.data.message) {
-          newMessage = newMessage + '\n' + e.data.message;
-        }
-        e.data.message = newMessage;
-        return $q.reject(e);
       }
     }
 
     function compactCollection(db, collection) {
       return $http.get('/db/' + db + '/compact/' + collection)
-        then(compactCollectionComplete);
+        then(compactCollectionComplete)
+        .catch((e) => {
+          exception.catcher('XHR failed for compactCollection')(e);
+          return $q.reject(e.data);
+        });
 
       function compactCollectionComplete(response) {
-        return response;
+        return response.data;
       }
     }
     
     function deleteCollection(db, collection) {
         return $http.delete('/api/db/' + db + '/' + collection)
-          .then(deleteCollectionComplete);
+          .then(deleteCollectionComplete)
+          .catch((e) => {
+            exception.catcher('XHR failed for deleteCollection')(e);
+            return $q.reject(e.data);
+          });
 
         function deleteCollectionComplete(response) {
-          return response;
+          return response.data;
         }
     }
 
     function exportCollection(db, collection) {
       return $http.get('/api/db/' + db + '/export/' + collection)
-        .then(exportCollectionComplete);
+        .then(exportCollectionComplete)
+        .catch((e) => {
+          exception.catcher('XHR failed for exportCollection')(e);
+          return $q.reject(e.data);
+        });
 
         function exportCollectionComplete(response) {
-          console.log(response);
-          return response;
-        }
-
-        function exportCollectionFailure(err) {
-          console.log(err);
+          return response.data;
         }
     }
 
     function renameCollection(db, coll, name) {
       return $http.put('/api/db/' + db + '/' + coll, {collection: name})
-        .then(renameCollectionComplete);
+        .then(renameCollectionComplete)
+        .catch((e) => {
+          exception.catcher('XHR failed for renameCollection')(e);
+          return $q.reject(e.data);
+        });
 
       function renameCollectionComplete(response) {
-        console.log(response);
-        return response;
+        return response.data;
       }
     }
   }

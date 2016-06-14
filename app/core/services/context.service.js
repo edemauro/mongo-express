@@ -4,8 +4,8 @@
     .factory('ContextService', ContextService);
 
   function ContextService($http) {
-    let prefix = 'angular/core/views/partials/';
-    let templates = [
+    const prefix = 'angular/core/views/partials/';
+    const templates = [
       {
         url: prefix + '_index.header.html'
       },
@@ -20,6 +20,7 @@
       }
     ];
     let activeTemplate = templates[0];
+
     let service = {
       alerts: [],
       context: {},

@@ -5,8 +5,8 @@
 
   function DatabaseService($http, $q, exception) {
     let service = {
-      deleteDatabase: deleteDatabase,
-      addDatabase: addDatabase
+      addDatabase: addDatabase,
+      deleteDatabase: deleteDatabase
     };
 
     return service;
@@ -25,16 +25,16 @@
     }
     
     function deleteDatabase(db) {
-        return $http.delete('/api/' + db)
-          .then(deleteDatabaseComplete)
-          .catch((e) => {
-            exception.catcher('XHR failed for deleteDatabase')(e);
-            return $q.reject(e.data);
-          });
+      return $http.delete('/api/' + db)
+        .then(deleteDatabaseComplete)
+        .catch((e) => {
+          exception.catcher('XHR failed for deleteDatabase')(e);
+          return $q.reject(e.data);
+        });
 
-        function deleteDatabaseComplete(response) {
-          return response.data;
-        }
+      function deleteDatabaseComplete(response) {
+        return response.data;
+      }
     }
   }
 })();

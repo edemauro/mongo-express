@@ -15,37 +15,57 @@
     function addDocument(db, collection, document) {
       return $http.post('/checkValid', {document: document})
         .then(documentCheckComplete)
-        .then(addDocumentComplete);
+        .catch((e) => {
+          exception.catcher('XHR failed for checkValid, addDocument')(e);
+          return $q.reject(e.data);
+        });
 
       function documentCheckComplete(response) {
-        return $http.post('/api/db/' + db + '/' + collection, {document: document});
-      }
+        return $http.post('/api/db/' + db + '/' + collection, {document: document})
+          .then(addDocumentComplete)
+          .catch((e) => {
+            exception.catcher('XHR failed for addDocument')(e);
+            return $q.reject(e.data);
+          });
 
-      function addDocumentComplete(response) {
-        return response;
+        function addDocumentComplete(response) {
+          return response.data;
+        }
       }
     }
 
     function deleteDocument(db, collection, document) {
       return $http.delete('/api/db/' + db + '/' + collection + '/' + JSON.stringify(document, null, '    '))
-        .then(deleteDocumentComplete);
+        .then(deleteDocumentComplete)
+        .catch((e) => {
+          exception.catcher('XHR failed for deleteDocument')(e);
+          return $q.reject(e.data);
+        });
 
       function deleteDocumentComplete(response) {
-        return response;
+        return response.data;
       }
     }
 
     function updateDocument(db, collection, document, documentName) {
       return $http.post('/checkValid', {document: document})
         .then(documentCheckComplete)
-        .then(updateDocumentComplete);
+        .catch((e) => {
+          exception.catcher('XHR failed for checkValid, updateDocument')(e);
+          return $q.reject(e.data);
+        });
 
       function documentCheckComplete(response) {
-        return $http.put('/api/db/' + db + '/' + collection + '/' + JSON.stringify(documentName, null, '    '), {document: document});
-      }
+        return $http.put('/api/db/' + db + '/' + collection + '/' + JSON.stringify(documentName, null, '    '), {document: document})
+          .then(updateDocumentComplete)
+          .catch((e) => {
+            exception.catcher('XHR failed for updateDocument')(e);
+            return $q.reject(e.data);
+          });
 
-      function updateDocumentComplete(response)  {
-        return response;
+        function updateDocumentComplete(response)  {
+          return response.data;
+        }
       }
     }
   }
