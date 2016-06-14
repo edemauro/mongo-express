@@ -40,7 +40,7 @@
     }
     
     function deleteCollection(db, collection) {
-        return $http.delete('/api/db/' + db + '/' + collection)
+        return $http.delete('/db/' + db + '/' + collection)
           .then(deleteCollectionComplete)
           .catch((e) => {
             exception.catcher('XHR failed for deleteCollection')(e);
