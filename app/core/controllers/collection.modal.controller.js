@@ -27,7 +27,6 @@
           });
       } else {
         vm.showMessage = true;
-        console.log('they do not match!');
       }
     };
 

@@ -17,20 +17,14 @@
     function addDocument() {
       return DocumentService.addDocument(db, collection, vm.doc)
         .then((response) => {
+          response.type = 'success';
           $uibModalInstance.close(response);
-        });
+        })
+        .catch((response) => {
+          response.type = 'danger';
+          $uibModalInstance.close(response);
+         });
     }
-
-    // function deleteCollection() {
-    //   if(vm.collectionConfirm === vm.collection) {
-    //     return CollectionService.deleteCollection(db, collection)
-    //       .then((response) => {
-    //         $uibModalInstance.close(response);
-    //       });
-    //   } else {
-    //     console.log('they do not match!');
-    //   }
-    // };
 
     function close() {
       $uibModalInstance.dismiss();

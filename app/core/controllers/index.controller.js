@@ -27,7 +27,7 @@
     }
 
     function addDb() {
-      DatabaseService.addDatabase(vm.database)
+      return DatabaseService.addDatabase(vm.database)
         .then(addDatabaseComplete)
         .catch(addDatabaseFailed);
 
