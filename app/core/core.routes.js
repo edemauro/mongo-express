@@ -53,12 +53,13 @@
       });
   }
 
-  function run($rootScope, $state) {
+  function run($rootScope, $state, ContextService) {
     $rootScope.$on('$stateChangeError', stateChangeError)
 
     function stateChangeError(event, toState, toParams, fromState, fromParams) {
-      let msg = 'Error routing to' + toState + '.';
-      console.log(msg);
+      let msg = 'There was a routing error.';
+      console.log(toState);
+      console.log(toParams);
       ContextService.addAlert({type: 'danger', msg: msg});
       $state.go('index');
     }

@@ -86,7 +86,7 @@
     }
 
     function getCollectionContext(db, collection) {
-      return $http.get('/api/db/' + db + "/" + collection)
+      return $http.get('/db/' + db + "/" + collection)
         .then(getCollectionContextComplete);
 
       function getCollectionContextComplete(response) {

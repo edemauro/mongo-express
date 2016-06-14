@@ -14,7 +14,7 @@
     return service;
 
     function addCollection(db, collection) {
-      return $http.post('/api/db/' + db, {collection: collection})
+      return $http.post('/db/' + db, {collection: collection})
         .then(addCollectionComplete)
         .catch((e) => {
           exception.catcher('XHR failed for addCollection')(e);
@@ -53,7 +53,7 @@
     }
 
     function renameCollection(db, coll, name) {
-      return $http.put('/api/db/' + db + '/' + coll, {collection: name})
+      return $http.put('/db/' + db + '/' + coll, {collection: name})
         .then(renameCollectionComplete)
         .catch((e) => {
           exception.catcher('XHR failed for renameCollection')(e);
