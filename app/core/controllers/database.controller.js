@@ -7,21 +7,33 @@
 
     function DatabaseController(ContextService, $stateParams, $uibModal, CollectionService) { 
       let vm = this;
+
+      vm.addCollection = addCollection;
       vm.context = ContextService.context;
       vm.deleteCollection = deleteCollection;
-      vm.exportCollection = exportCollection;
-      vm.addCollection = addCollection;
 
-      ContextService.setActiveTemplate(0);
+      activate();
+
+      function activate() {
+        ContextService.setActiveTemplate(0);
+      }
 
       function addCollection() {
         CollectionService.addCollection($stateParams.database, vm.collection)
-          .then(() => {
-            return ContextService.getDatabaseContext($stateParams.database)
-              .then(() => {
-                vm.context = ContextService.context;
-              });
-          });
+          .then(addCollectionComplete)
+          .catch(addCollectionFailed);
+
+        function addCollectionComplete(response) {
+          ContextService.addAlert({type: 'success', msg: response.message });
+          vm.collection = "";
+
+          return ContextService.getDatabaseContext($stateParams.database)
+            .then(() => { vm.context = ContextService.context; });
+        }
+
+        function addCollectionFailed(response) {
+          ContextService.addAlert({type: 'danger', msg: response.message });
+        }
       }
 
       function deleteCollection(collection) {
@@ -41,20 +53,11 @@
         });
 
         modalInstance.result.then((response) => {
-          return ContextService.getDatabaseContext($stateParams.database)
-            .then(() => {
-              vm.context = ContextService.context;
-            });
-        }, () => {
-          console.log('Modal dismissed at: ' + new Date());
-        });
-      }
+          ContextService.addAlert({type: response.type, msg: response.message });
 
-      function exportCollection(collection) {
-        return CollectionService.exportCollection($stateParams.database, collection)
-          .then((response) => {
-            console.log(response);
-          });
+          return ContextService.getDatabaseContext($stateParams.database)
+            .then(() => { vm.context = ContextService.context; });
+        });
       }
     }
 })();

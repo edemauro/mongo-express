@@ -8,8 +8,7 @@
       addCollection: addCollection,
       compactCollection: compactCollection,
       deleteCollection: deleteCollection,
-      exportCollection: exportCollection,
-      renameCollection: renameCollection,
+      renameCollection: renameCollection
     };
 
     return service;
@@ -49,19 +48,6 @@
           });
 
         function deleteCollectionComplete(response) {
-          return response.data;
-        }
-    }
-
-    function exportCollection(db, collection) {
-      return $http.get('/api/db/' + db + '/export/' + collection)
-        .then(exportCollectionComplete)
-        .catch((e) => {
-          exception.catcher('XHR failed for exportCollection')(e);
-          return $q.reject(e.data);
-        });
-
-        function exportCollectionComplete(response) {
           return response.data;
         }
     }

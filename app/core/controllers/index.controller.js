@@ -8,19 +8,23 @@
   function IndexController(ContextService, $uibModal, DatabaseService) {
     let vm = this;
 
+    vm.addDb = addDb;
     vm.context = ContextService.context;
     vm.deleteDb = deleteDb;
-    vm.addDb = addDb;
 
-    ContextService.setActiveTemplate(0);
+    activate();
 
-    ContextService.getIndex()
-      .then(() => {
-        vm.context = ContextService.context;
-        if(vm.context.ctx.info.uptime > 86400) {
-          vm.uptimeDays = window.Math.floor(vm.context.ctx.info.uptime / 86400) + 'days';
-        }
-      });
+    function activate() {
+      ContextService.setActiveTemplate(0);
+
+      ContextService.getIndex()
+        .then(() => {
+          vm.context = ContextService.context;
+          if(vm.context.ctx.info.uptime > 86400) {
+            vm.uptimeDays = window.Math.floor(vm.context.ctx.info.uptime / 86400) + 'days';
+          }
+        });
+    }
 
     function addDb() {
       DatabaseService.addDatabase(vm.database)
@@ -32,9 +36,7 @@
         vm.database = "";
 
         return ContextService.getIndex()
-          .then(() => {
-            vm.context = ContextService.context;
-          });
+          .then(() => { vm.context = ContextService.context; });
       }
 
       function addDatabaseFailed(response) {
@@ -59,9 +61,7 @@
         ContextService.addAlert({type: response.type, msg: response.message });
         
         return ContextService.getIndex()
-          .then(() => {
-            vm.context = ContextService.context;
-          });
+          .then(() => { vm.context = ContextService.context; });
       });
     };
   };

@@ -52,8 +52,8 @@
       });
   }
 
-  function gridfsPrepService($stateParams, ContextService) {
-    return ContextService.getGridfsContext($stateParams.database, $stateParams.bucket);
+  function collectionPrepService($stateParams, ContextService) {
+    return ContextService.getCollectionContext($stateParams.database, $stateParams.collection);
   }
 
   function databasePrepService($stateParams, ContextService) {
@@ -64,7 +64,7 @@
     return ContextService.getDocumentContext($stateParams.database, $stateParams.collection, $stateParams.document);
   }
 
-  function collectionPrepService($stateParams, ContextService) {
-    return ContextService.getCollectionContext($stateParams.database, $stateParams.collection);
+  function gridfsPrepService($stateParams, ContextService) {
+    return ContextService.getGridfsContext($stateParams.database, $stateParams.bucket);
   }
 })();

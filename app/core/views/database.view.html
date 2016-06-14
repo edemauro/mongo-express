@@ -63,8 +63,9 @@
       Be careful! You are about to delete whole <strong>{{ vm.collection }}</strong> collection.
     </p>
     <p>
-      <label for="confirmation-input">Type the collection name to proceed.</label>
-      <input type="text" id="confirmation-input" name="confirmation-input" ng-model="vm.collectionConfirm" />
+      <label for="confirmationInput">Type the collection name to proceed.</label>
+      <input type="text" id="confirmationInput" name="confirmationInput" ng-model="vm.collectionConfirm" required />
+      <p ng-show="vm.collectionConfirm !== vm.collection && vm.showMessage" class="help-block">Database name does not match.</p>
     </p>
   </div>
   <div class="modal-footer">

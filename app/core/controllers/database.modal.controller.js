@@ -8,10 +8,10 @@
   function ModalController($uibModalInstance, DatabaseService, db) {
     let vm = this;
 
+    vm.close = close;
     vm.database = db;
     vm.dbConfirm = "";
     vm.deleteDb = deleteDb;
-    vm.close = close;
     vm.showMessage = false;
 
     function deleteDb() {
@@ -27,7 +27,6 @@
           });
       } else {
         vm.showMessage = true;
-        console.log('they do not match!');
       }
     };
 
