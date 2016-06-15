@@ -21,7 +21,7 @@
         });
 
       function documentCheckComplete(response) {
-        return $http.post('/api/db/' + db + '/' + collection, {document: document})
+        return $http.post('/db/' + db + '/' + collection, {document: document})
           .then(addDocumentComplete)
           .catch((e) => {
             exception.catcher('XHR failed for addDocument')(e);
@@ -35,7 +35,7 @@
     }
 
     function deleteDocument(db, collection, document) {
-      return $http.delete('/api/db/' + db + '/' + collection + '/' + JSON.stringify(document, null, '    '))
+      return $http.delete('/db/' + db + '/' + collection + '/' + JSON.stringify(document, null, '    '))
         .then(deleteDocumentComplete)
         .catch((e) => {
           exception.catcher('XHR failed for deleteDocument')(e);
@@ -56,7 +56,7 @@
         });
 
       function documentCheckComplete(response) {
-        return $http.put('/api/db/' + db + '/' + collection + '/' + JSON.stringify(documentName, null, '    '), {document: document})
+        return $http.put('/db/' + db + '/' + collection + '/' + JSON.stringify(documentName, null, '    '), {document: document})
           .then(updateDocumentComplete)
           .catch((e) => {
             exception.catcher('XHR failed for updateDocument')(e);

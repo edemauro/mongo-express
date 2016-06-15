@@ -22,18 +22,18 @@
     let activeTemplate = templates[0];
 
     let service = {
-      alerts: [],
-      context: {},
-      getIndex: getIndex,
-      getDocumentContext: getDocumentContext,
-      getDatabaseContext: getDatabaseContext,
-      getCollectionContext: getCollectionContext,
-      getGridfsContext: getGridfsContext,
-      templates: templates,
-      getActiveTemplate: getActiveTemplate,
-      setActiveTemplate: setActiveTemplate,
       addAlert: addAlert,
-      closeAlert: closeAlert
+      alerts: [],
+      closeAlert: closeAlert,
+      context: {},
+      getActiveTemplate: getActiveTemplate,
+      getCollectionContext: getCollectionContext,
+      getDatabaseContext: getDatabaseContext,
+      getDocumentContext: getDocumentContext,
+      getGridfsContext: getGridfsContext,
+      getIndex: getIndex,
+      setActiveTemplate: setActiveTemplate,
+      templates: templates
     };
 
     return service;
@@ -56,7 +56,7 @@
     }
 
     function getGridfsContext(db, bucket) {
-      return $http.get('/api/db/' + db + '/gridFS/' + bucket)
+      return $http.get('/db/' + db + '/gridFS/' + bucket)
         .then(getGridfsContext);
 
       function getGridfsContext(response) {
@@ -76,7 +76,7 @@
     }
 
     function getDocumentContext(db, collection, document) {
-      return $http.get('/api/db/' + db + '/' + collection + '/' + JSON.stringify(document, null, '    '))
+      return $http.get('/db/' + db + '/' + collection + '/' + JSON.stringify(document, null, '    '))
         .then(getDocumentContextComplete);
 
       function getDocumentContextComplete(response) {
