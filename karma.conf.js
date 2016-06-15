@@ -3,7 +3,6 @@ module.exports = function(config) {
     frameworks: ['jasmine'],
 
     files: [
-      'public/javascripts/jquery-2.1.4.min.js',
       'public/bower_components/angular/angular.js',
       'public/bower_components/codemirror/lib/codemirror.js',
       'public/bower_components/angular-mocks/angular-mocks.js',
@@ -26,6 +25,6 @@ module.exports = function(config) {
 
     browsers: ['Chrome'],
 
-    singleRun: true
+    singleRun: false
   });
 }
