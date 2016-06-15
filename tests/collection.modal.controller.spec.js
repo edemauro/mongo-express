@@ -4,7 +4,8 @@ describe('CollectionModalController:', function() {
   var scope, 
     CollectionModalController,
     CollectionService,
-    db
+    db,
+    collection
 
   beforeEach(function() {
 
