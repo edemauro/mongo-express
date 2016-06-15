@@ -25,7 +25,7 @@
     }
     
     function deleteDatabase(db) {
-      return $http.delete('/api/' + db)
+      return $http.delete('/' + db)
         .then(deleteDatabaseComplete)
         .catch((e) => {
           exception.catcher('XHR failed for deleteDatabase')(e);

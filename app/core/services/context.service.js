@@ -66,7 +66,7 @@
     }
 
     function getDatabaseContext(db) {
-      return $http.get('/api/db/' + db)
+      return $http.get('/db/' + db)
         .then(getDatabaseContextComplete);
 
       function getDatabaseContextComplete(response) {
