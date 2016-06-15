@@ -38,7 +38,7 @@
           }
         });
 
-        modalInstance.result.then((response) => {
+        return modalInstance.result.then((response) => {
           ContextService.addAlert({type: response.type, msg: response.message });
 
           return ContextService.getCollectionContext($stateParams.database, $stateParams.collection)
@@ -72,7 +72,7 @@
           }
         });
 
-        modalInstance.result.then((response) => {
+        return modalInstance.result.then((response) => {
           ContextService.addAlert({type: response.type, msg: response.message });
           $state.go('database', { 'database': $stateParams.database });
         });

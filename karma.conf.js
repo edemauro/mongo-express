@@ -12,7 +12,7 @@ module.exports = function(config) {
       'public/bower_components/angular-ui-router/release/angular-ui-router.js',
       'public/angular/core/core.module.js',
       'public/angular/core/**/*.js',
-      'tests/*.js'
+      'tests/**/*.js'
     ],
 
     reporters: ['progress'],
