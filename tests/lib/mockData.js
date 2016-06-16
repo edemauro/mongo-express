@@ -1,7 +1,50 @@
 var mockData = (function() {
   return {
+    getMockDatabase: getMockDatabase,
     getMockCollection: getMockCollection
   };
+
+  function getMockDatabase() {
+    return {
+      "baseHref": "/",
+      "databases": ["local", "sails", "test", "test_database"],
+      "collections": {
+        "db": [],
+        "local": ["rest", "startup_log", "system.indexes", "test"],
+        "sails": ["coverletter", "job", "system.indexes", "user", "users"],
+        "test": ["fs.chunks", "fs.files", "system.indexes"],
+        "test_database": ["coverletter", "job", "profilepic", "resume", "system.indexes", "user"]
+      },
+      "gridFSBuckets": {
+        "db": [],
+        "local": [],
+        "sails": [],
+        "test": ["fs"],
+        "test_database": []
+      },
+      "readOnly": false,
+      "dbName": "local",
+      "ctx": {
+        "title": "Viewing Database: local",
+        "databases": ["local", "sails", "test", "test_database"],
+        "colls": ["rest", "startup_log", "system.indexes", "test"],
+        "grids": [],
+        "stats": {
+          "avgObjSize": "1.09 KB",
+          "collections": 5,
+          "dataFileVersion": "4.22",
+          "dataSize": "94.8 KB",
+          "extentFreeListNum": 3,
+          "fileSize": "67.1 MB",
+          "indexes": 3,
+          "indexSize": "24.5 KB",
+          "numExtents": "5",
+          "objects": 87,
+          "storageSize": "10.5 MB"
+        }
+      }
+    }
+  }
 
   function getMockCollection() {
     return {

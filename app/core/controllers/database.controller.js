@@ -43,16 +43,12 @@
           controller: 'CollectionModalController',
           controllerAs: 'vm',
           resolve: {
-            db: () => {
-              return $stateParams.database;
-            },
-            collection: () => {
-              return collection;
-            }
+            db: () => { return $stateParams.database; },
+            collection: () => { return collection; }
           }
         });
 
-        modalInstance.result.then((response) => {
+        return modalInstance.result.then((response) => {
           ContextService.addAlert({type: response.type, msg: response.message });
 
           return ContextService.getDatabaseContext($stateParams.database)
