@@ -2,8 +2,49 @@ var mockData = (function() {
   return {
     getMockDatabase: getMockDatabase,
     getMockCollection: getMockCollection,
-    getMockDocument: getMockDocument
+    getMockDocument: getMockDocument,
+    getMockGridfs: getMockGridfs
   };
+
+  function getMockGridfs() {
+    return {
+      "baseHref": "/",
+      "databases": ["local", "sails", "test", "test_database"],
+      "collections": {
+        "db": [],
+        "local": ["rest", "startup_log", "system.indexes", "test"],
+        "sails": ["coverletter", "job", "system.indexes", "user", "users"],
+        "test": ["fs.chunks", "fs.files", "system.indexes"],
+        "test_database": ["coverletter", "job", "profilepic", "resume", "system.indexes", "user"]
+      },
+      "gridFSBuckets": {
+        "db": [],
+        "local": [],
+        "sails": [],
+        "test": ["fs"],
+        "test_database": []
+      },
+      "readOnly": false,
+      "dbName": "test",
+      "ctx": {
+        "buckets": ["fs"],
+        "columns": ["filename", "length", "uploadDate", "md5"],
+        "files": [{
+          "_id": "575e5eab94cef1420d760d66",
+          "uploadDate": "2016-06-13T07:20:11.641Z",
+          "length": "5.00 Bytes",
+          "md5": "d8e8fca2dc0f896fd7cb4cb0031ba249",
+          "filename": "/Users/ericdemauro/Downloads/test.txt"
+        }],
+        "title": "Viewing Bucket: fs",
+        "stats": {
+          "avgChunk": "261 KB",
+          "totalSize": "5.00 Bytes"
+        }
+      },
+      "bucketName": "fs"
+    };
+  }
 
   function getMockDocument() {
     return {
