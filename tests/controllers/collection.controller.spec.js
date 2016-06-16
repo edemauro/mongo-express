@@ -10,20 +10,7 @@ describe('CollectionController:', function() {
     DocumentService;
 
   beforeEach(inject(function($q) {
-    function FakeModal(){
-      this.resultDeferred = $q.defer();
-      this.result = this.resultDeferred.promise;
-    }
- 
-    FakeModal.prototype.close = function (item) {
-      this.resultDeferred.resolve(item);
-    };
-    
-    FakeModal.prototype.dismiss = function (item) {
-      this.resultDeferred.reject(item);
-    };
-
-    fake = new FakeModal();
+    fake = new FakeModal($q);
   }));
 
   beforeEach(function() {
