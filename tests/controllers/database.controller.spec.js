@@ -15,8 +15,6 @@ describe('DatabaseController:', function() {
       this.result = this.resultDeferred.promise;
     }
     
-    FakeModal.prototype.open = function(options){ return this;  };
-    
     FakeModal.prototype.close = function (item) {
       this.resultDeferred.resolve(item);
     };
