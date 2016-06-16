@@ -46,6 +46,7 @@ describe('IndexController:', function() {
     beforeEach(inject(function($q) {
       deferred = $q.defer();
       spyOn(DatabaseService, 'addDatabase').and.returnValue(deferred.promise);
+      spyOn(ContextService, 'getIndex').and.returnValue(deferred.promise);
       IndexController.database = 'red';
       IndexController.addDb();
     }));
@@ -59,7 +60,7 @@ describe('IndexController:', function() {
       scope.$digest();
       expect(IndexController.database).toEqual("");
       expect(ContextService.addAlert).toHaveBeenCalled();
-      $httpBackend.expectGET('/api/index');
+      expect(ContextService.getIndex).toHaveBeenCalled();
     });
 
     it('should add an alert on failure', function() {
@@ -87,7 +88,6 @@ describe('IndexController:', function() {
       fake.close({ type: 'success', message: 'Database deleted' });
       scope.$digest();
       expect(ContextService.addAlert).toHaveBeenCalled();
-      $httpBackend.expectGET('/api/index');
     });
   });
 });

@@ -52,6 +52,7 @@
 
       function getIndexComplete(response) {
         angular.extend(service.context, response.data);
+        return response.data;
       }
     }
 

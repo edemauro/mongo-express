@@ -1,10 +1,10 @@
-(function(window) {
+(function(root) {
   'use strict';
   
-  window.FakeModal = function FakeModal($q){
+  root.FakeModal = function FakeModal($q){
     this.resultDeferred = $q.defer();
     this.result = this.resultDeferred.promise;
-  }
+  };
     
   FakeModal.prototype = {
     close: function (item) {
@@ -13,5 +13,5 @@
     dismiss: function (item) {
       this.resultDeferred.reject(item);
     }
-  }
-})(window);
+  };
+})(this);
