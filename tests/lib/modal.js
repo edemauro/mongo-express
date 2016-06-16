@@ -1,4 +1,6 @@
 (function(window) {
+  'use strict';
+  
   window.FakeModal = function FakeModal($q){
     this.resultDeferred = $q.defer();
     this.result = this.resultDeferred.promise;

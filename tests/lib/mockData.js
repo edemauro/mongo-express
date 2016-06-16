@@ -1,8 +1,41 @@
 var mockData = (function() {
   return {
     getMockDatabase: getMockDatabase,
-    getMockCollection: getMockCollection
+    getMockCollection: getMockCollection,
+    getMockDocument: getMockDocument
   };
+
+  function getMockDocument() {
+    return {
+      "baseHref": "/",
+      "databases": ["local", "sails", "test", "test_database"],
+      "collections": ["coverletter", "job", "system.indexes", "user", "users"],
+      "gridFSBuckets": [
+        [],
+        [],
+        [],
+        [],
+        []
+      ],
+      "readOnly": false,
+      "ctx": {
+        "title": "Editing Document: 572804982e7a5db008b26525",
+        "editorTheme": "rubyblue",
+        "docLength": 8,
+        "docString": "{\n    \"_id\": ObjectID(\"572804982e7a5db008b26525\"),\n    \"email\": \"eric@eric.com\",\n    \"password\": \"$2a$10$WkB6lpmYjA/0FfE/s18xFOOhqwxoTxB/NPdP43L68R3RCp.xGBN86\",\n    \"createdAt\": ISODate(\"2016-05-03T01:53:28.618Z\"),\n    \"updatedAt\": ISODate(\"2016-05-03T01:53:36.334Z\"),\n    \"address\": \"18111 Nordhoff St, Northridge, CA 91330\"\n}"
+      },
+      "dbName": "sails",
+      "collectionName": "user",
+      "document": {
+        "_id": "572804982e7a5db008b26525",
+        "email": "eric@eric.com",
+        "password": "$2a$10$WkB6lpmYjA/0FfE/s18xFOOhqwxoTxB/NPdP43L68R3RCp.xGBN86",
+        "createdAt": "2016-05-03T01:53:28.618Z",
+        "updatedAt": "2016-05-03T01:53:36.334Z",
+        "address": "18111 Nordhoff St, Northridge, CA 91330"
+      }
+    };
+  }
 
   function getMockDatabase() {
     return {
@@ -43,7 +76,7 @@ var mockData = (function() {
           "storageSize": "10.5 MB"
         }
       }
-    }
+    };
   }
 
   function getMockCollection() {
