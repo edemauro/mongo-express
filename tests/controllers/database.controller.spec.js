@@ -7,24 +7,26 @@ describe('DatabaseController:', function() {
     $stateParams,
     $uibModal,
     CollectionService,
-    fakeModal = {
-      result: {
-        then: function(confirmCallback, cancelCallback) {
-              //Store the callbacks for later when the user clicks on the OK or Cancel button of the dialog
-              this.confirmCallBack = confirmCallback;
-              this.cancelCallback = cancelCallback;
-        }
-      },
-      close: function( item ) {
-          //The user clicked OK on the modal dialog, call the stored confirm callback with the selected item
-          this.result.confirmCallBack( item );
-      },
-      dismiss: function( type ) {
-          //The user clicked cancel on the modal dialog, call the stored cancel callback
-          this.result.cancelCallback( type );
-      }
+    fake;
+
+  beforeEach(inject(function($q) {
+    function FakeModal(){
+      this.resultDeferred = $q.defer();
+      this.result = this.resultDeferred.promise;
+    }
+    
+    FakeModal.prototype.open = function(options){ return this;  };
+    
+    FakeModal.prototype.close = function (item) {
+      this.resultDeferred.resolve(item);
+    };
+    
+    FakeModal.prototype.dismiss = function (item) {
+      this.resultDeferred.reject(item);
     };
 
+    fake = new FakeModal();
+  }));
 
   beforeEach(function() {
 
@@ -82,13 +84,24 @@ describe('DatabaseController:', function() {
   });
 
   describe('deleteCollection', function() {
-    beforeEach(function() {
-      spyOn($uibModal, 'open').and.returnValue(fakeModal);
+    var deferred;
+
+    beforeEach(inject(function($q) {
+      deferred = $q.defer();
+      spyOn($uibModal, 'open').and.returnValue(fake);
+      spyOn(ContextService, 'getDatabaseContext').and.returnValue(deferred.promise);
       DatabaseController.deleteCollection();
-    });
+    }));
 
     it('should open a new modal', function() {
       expect($uibModal.open).toHaveBeenCalled();
+    });
+
+    it('should add a new alert on success', function() {
+      fake.close({ type: 'success', message: 'Collection deleted' });
+      scope.$digest();
+      expect(ContextService.addAlert).toHaveBeenCalled();
+      expect(ContextService.getDatabaseContext).toHaveBeenCalled();
     });
   })
 });
