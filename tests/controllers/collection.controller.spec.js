@@ -9,6 +9,25 @@ describe('CollectionController:', function() {
     $state,
     DocumentService;
 
+  beforeEach(inject(function($q) {
+    function FakeModal(){
+      this.resultDeferred = $q.defer();
+      this.result = this.resultDeferred.promise;
+    }
+    
+    FakeModal.prototype.open = function(options){ return this;  };
+    
+    FakeModal.prototype.close = function (item) {
+      this.resultDeferred.resolve(item);
+    };
+    
+    FakeModal.prototype.dismiss = function (item) {
+      this.resultDeferred.reject(item);
+    };
+
+    fake = new FakeModal();
+  }));
+
   beforeEach(function() {
 
     inject(function($rootScope, $controller, _$uibModal_, _CollectionService_, _ContextService_, _$stateParams_, _$state_, _DocumentService_) {
@@ -40,6 +59,28 @@ describe('CollectionController:', function() {
     expect(CollectionController).toBeDefined();
   });
 
+  describe('addDocument', function() {
+    var deferred;
+
+    beforeEach(inject(function($q) {
+      deferred = $q.defer();
+      spyOn($uibModal, 'open').and.returnValue(fake);
+      spyOn(ContextService, 'getCollectionContext').and.returnValue(deferred.promise);
+      CollectionController.addDocument();
+    }));
+
+    it('should open a new modal', function() {
+      expect($uibModal.open).toHaveBeenCalled();
+    });
+
+    it('should add an alert and update context on success', function() {
+      fake.close({ type: 'success', message: 'Collection added' });
+      scope.$digest();
+      expect(ContextService.addAlert).toHaveBeenCalled();
+      expect(ContextService.getCollectionContext).toHaveBeenCalled();
+    });
+  });
+
   describe('compact', function() {
     var deferred;
 
@@ -57,6 +98,28 @@ describe('CollectionController:', function() {
       deferred.resolve();
       scope.$digest();
       expect(ContextService.addAlert).toHaveBeenCalled();
+    });
+  });
+
+  describe('deleteCollection', function() {
+    var deferred;
+
+    beforeEach(inject(function($q) {
+      deferred = $q.defer();
+      spyOn($uibModal, 'open').and.returnValue(fake);
+      spyOn($state, 'go');
+      CollectionController.deleteCollection();
+    }));
+
+    it('should open a new modal', function() {
+      expect($uibModal.open).toHaveBeenCalled();
+    });
+
+    it('should add an alert and update context on success', function() {
+      fake.close({ type: 'success', message: 'Collection deleted' });
+      scope.$digest();
+      expect(ContextService.addAlert).toHaveBeenCalled();
+      expect($state.go).toHaveBeenCalled();
     });
   });
 
