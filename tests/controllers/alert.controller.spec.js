@@ -1,4 +1,4 @@
-describe('Controller: AlertController', function() {
+describe('AlertController', function() {
   var scope, 
     AlertController,
     ContextService;
