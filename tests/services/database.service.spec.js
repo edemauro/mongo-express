@@ -1,4 +1,4 @@
-describe('ContextService', function() {
+describe('DatabaseService', function() {
   beforeEach(module('app'));
 
   var $httpBackend,
