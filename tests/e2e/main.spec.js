@@ -64,4 +64,26 @@ describe('E2E:', () => {
       });
     });
   });
+
+  describe('collection view:', () => {
+    beforeEach(() => {
+      browser.get('http://admin:pass@localhost:8081/#/db/sails/user');
+    });
+
+    it('should be able to create a document', () => {
+      element(by.css('[ng-click="vm.addDocument()"]')).click();
+      element(by.css('.modal-footer button[type="submit"]')).click();
+
+      element(by.css('.alert-success span.ng-scope')).getText().then(text => {
+        expect(text).toEqual('Document added!');
+      });
+    });
+
+    it('should be able to delete a document', () => {
+      element.all(by.css('[ng-click="vm.deleteDocument(value);$event.stopPropagation()"]')).get(1).click();
+      element(by.css('.alert-success span.ng-scope')).getText().then(text => {
+        expect(text).toContain('Document deleted!');
+      });
+    });
+  });
 });
