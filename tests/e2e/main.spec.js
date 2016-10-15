@@ -86,4 +86,27 @@ describe('E2E:', () => {
       });
     });
   });
+
+  describe('document view', () => {
+    beforeEach(() => {
+      browser.get('http://admin:pass@localhost:8081/#/db/sails/user');
+      element(by.css('[ng-click="vm.addDocument()"]')).click();
+      element(by.css('.modal-footer button[type="submit"]')).click();
+      element(by.css('[ng-click="close({$event: $event})"]')).click();
+      element.all(by.css('tr[ng-click="vm.loadDocument(doc._id)"]')).get(0).click();
+    });
+
+    it('should be able to delete a document', () => {
+      element(by.css('.btn-danger')).click();
+      element(by.css('.alert-success span.ng-scope')).getText().then(text => {
+        expect(text).toContain('Document deleted!');
+      });
+    });
+
+    it('should be able to navigate back to the collection view', () => {
+      element(by.css('[ng-click="vm.back()"]')).click();
+      browser.switchTo().alert().accept();
+      expect(browser.getCurrentUrl()).toEqual('http://admin:pass@localhost:8081/#/db/sails/user');
+    });
+  });
 });
