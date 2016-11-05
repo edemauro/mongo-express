@@ -104,7 +104,7 @@ module.exports = {
     console: true,
 
     //documentsPerPage: how many documents you want to see at once in collection view
-    documentsPerPage: 10,
+    documentsPerPage: 1000,
 
     //editorTheme: Name of the theme you want to use for displaying documents
     //See http://codemirror.net/demo/theme.html for all examples
